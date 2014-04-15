@@ -28,7 +28,7 @@
         <schedule>
                 <job>
                      <name>SocketJob</name>
-                     <job-class>br.gov.cindacta3.monitortermico.quartz.SocketJob</job-class>
+                     <job-class>br.com.practicalsolutions.monitortermico.quartz.SocketJob</job-class>
                 </job>
                 <trigger>
                         <simple>

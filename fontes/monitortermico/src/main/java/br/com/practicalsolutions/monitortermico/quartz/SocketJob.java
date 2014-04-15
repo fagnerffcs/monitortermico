@@ -27,9 +27,9 @@ public class SocketJob implements Job {
 	
 	private Logger log = LoggerFactory.getLogger(SocketJob.class);
 	
-	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitor/AlertaRegistration";	
-	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitor/EquipamentoRegistration";
-	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitor/MedicaoRegistration";
+	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitortermico/AlertaRegistration";	
+	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitortermico/EquipamentoRegistration";
+	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitortermico/MedicaoRegistration";
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -44,59 +44,61 @@ public class SocketJob implements Job {
 			final Context con = new InitialContext();
 			medicaoRegistration = (MedicaoRegistration) con.lookup(MEDICAO_REGISTRATION_LOOKUP);
 			equipamentoRegistration = (EquipamentoRegistration) con.lookup(EQUIPAMENTO_REGISTRATION_LOOKUP);
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-
-		for (Equipamento e : equipamentoRegistration.listarEquipamentos()) {
 			
-			try {
-				InetAddress address = InetAddress.getByName(e.getIp());
-				socket = new Socket(address, e.getPorta());
-				socket.sendUrgentData('a');
-				receive = new BufferedInputStream(socket.getInputStream());
-				byte data[] = new byte[10];
-				receive.read(data,0,data.length);
+			for (Equipamento e : equipamentoRegistration.listarEquipamentos()) {
 				
-				String sinal = String.valueOf((char)data[1]);
-				String temp = String.format("%s%s.%s", String.valueOf((char)data[2]), 
-													   String.valueOf((char)data[3]), 
-													   String.valueOf((char)data[4]));
-				
-				double temperatura = Double.parseDouble(temp);
-				
-				String umidity = String.format("%s%s.%s", String.valueOf((char)data[6]), 
-						   		 String.valueOf((char)data[7]), 
-						   		 String.valueOf((char)data[8]));
-				
-				double umidade = Double.parseDouble(umidity);
-				log.info("Temperatura: " + sinal+temperatura);
-				log.info("Umidade: " + umidade);
-				
-				Medicao m = new Medicao(temperatura, umidade);
-				m.setEquipamento(e);
-				m.setMarcacao(new Date());
-				medicaoRegistration.register(m);
-				
-				if(m.getTemperatura() > e.getLimiteSuperiorTemperatura() ||
-				   m.getTemperatura() < e.getLimiteInferiorTemperatura()||
-				   m.getUmidade() > e.getLimiteSuperiorUmidade() ||
-				   m.getUmidade() < e.getLimiteInferiorUmidade()){
-					Alerta a = registrarAlerta(e);
-					if(a!=null && a.getQtdeAlertas() > 3 && !a.isEnviado()){
-						enviarAlerta(e, m);
-						marcarAlertaComoEnviado(e.getId());
+				try {
+					InetAddress address = InetAddress.getByName(e.getIp());
+					socket = new Socket(address, e.getPorta());
+					socket.sendUrgentData('a');
+					receive = new BufferedInputStream(socket.getInputStream());
+					byte data[] = new byte[10];
+					receive.read(data,0,data.length);
+					
+					String sinal = String.valueOf((char)data[1]);
+					String temp = String.format("%s%s.%s", String.valueOf((char)data[2]), 
+														   String.valueOf((char)data[3]), 
+														   String.valueOf((char)data[4]));
+					
+					double temperatura = Double.parseDouble(temp);
+					
+					String umidity = String.format("%s%s.%s", String.valueOf((char)data[6]), 
+							   		 String.valueOf((char)data[7]), 
+							   		 String.valueOf((char)data[8]));
+					
+					double umidade = Double.parseDouble(umidity);
+					log.info("Temperatura: " + sinal+temperatura);
+					log.info("Umidade: " + umidade);
+					
+					Medicao m = new Medicao(temperatura, umidade);
+					m.setEquipamento(e);
+					m.setMarcacao(new Date());
+					medicaoRegistration.register(m);
+					
+					if(m.getTemperatura() > e.getLimiteSuperiorTemperatura() ||
+					   m.getTemperatura() < e.getLimiteInferiorTemperatura()||
+					   m.getUmidade() > e.getLimiteSuperiorUmidade() ||
+					   m.getUmidade() < e.getLimiteInferiorUmidade()){
+						Alerta a = registrarAlerta(e);
+						if(a!=null && a.getQtdeAlertas() > 3 && !a.isEnviado()){
+							enviarAlerta(e, m);
+							marcarAlertaComoEnviado(e.getId());
+						}
 					}
-				}
-				
-				receive.close();
-				socket.close();
-			} catch(Exception err){
-				log.info("Exception in accessing file");
-				err.printStackTrace();
-			}		
+					
+					receive.close();
+					socket.close();
+				} catch(Exception err){
+					log.info("Exception in accessing file");
+					err.printStackTrace();
+				}		
 
+			}
+			
+		} catch (NamingException e) {
+			log.error("Erro ao criar medicaoRegistration");
 		}
+
 		
 	}
 	
