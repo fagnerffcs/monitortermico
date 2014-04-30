@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#equipamento_grafico.xhtml"
+  PATH="/equipamento_grafico.xhtml" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#equipamento_grafico.xhtml:0" NAME="item"
+   PATH="/equipamento_grafico.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SUCESSO:#{equipamentoController.voltar}:#cadastroEquipamento.xhtml"
+    NAME="output" PATH="/cadastroEquipamento.xhtml"
+    TARGET="rules:#cadastroEquipamento.xhtml"
+    TITLE="#{equipamentoController.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#equipamento.xhtml" PATH="/equipamento.xhtml"
+  SHAPE="48,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#equipamento.xhtml:0" NAME="item"
+   PATH="/equipamento.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SUCESSO:#{equipamentoController.voltar}:#index.xhtml"
+    NAME="output" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{equipamentoController.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#cadastroEquipamento.xhtml"
+  PATH="/cadastroEquipamento.xhtml" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cadastroEquipamento.xhtml:0" NAME="item"
+   PATH="/cadastroEquipamento.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SUCESSO:#{equipamentoController.goDetail(equipamento)}:#equipamento_grafico.xhtml"
+    NAME="output" PATH="/equipamento_grafico.xhtml"
+    TARGET="rules:#equipamento_grafico.xhtml"
+    TITLE="#{equipamentoController.goDetail(equipamento)}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

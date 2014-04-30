@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h2>Equipamentos</h2>
+		<h:panelGroup rendered="#{empty equipamentos}">
+			<em>Nenhum equipamento registrado.</em>
+		</h:panelGroup>
+
+		<h:form id="listaEquipamentos" style="width:100%">
+			<p:dataTable var="equipamento" value="#{equipamentos}"
+				rendered="#{not empty equipamentos}" >
+				<p:column>
+					<f:facet name="header">Descrição</f:facet>
+		                #{equipamento.descricao}
+	            </p:column>
+	            
+		        <p:column style="width:4%">
+		            <p:commandLink onclick="PF('dialog').show();" title="Ver Gráfico" styleClass="ui-icon ui-icon-search">  
+		                <f:setPropertyActionListener value="#{equipamento}" target="#{equipamentoController.selecionado}" />
+		            </p:commandLink>  
+		        </p:column>
+			</p:dataTable>
+			<h:commandButton value="Voltar" action="#{equipamentoController.voltar}" />
+		</h:form>
+		
+	    <p:dialog id="dialog" header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true">  
+	        <p:outputPanel id="documentPanel">  
+	            <h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty equipamentoController.selecionado}">  
+	                <h:outputLabel for="tempChart" value="Temperatura: " />  
+	                <p:graphicImage id="tempChart" value="#{equipamentoController.tempChart}" />  
+	  
+	                <h:outputLabel for="umidChart" value="Umidade: " />  
+					<p:graphicImage id="umidChart" value="#{equipamentoController.umidadeChart}" />  
+	            </h:panelGrid>  
+	        </p:outputPanel>  
+	    </p:dialog>  		
+		
+	</ui:define>
+</ui:composition>
