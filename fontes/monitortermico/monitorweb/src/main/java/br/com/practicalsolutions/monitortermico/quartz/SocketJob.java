@@ -27,9 +27,9 @@ public class SocketJob implements Job {
 	
 	private Logger log = LoggerFactory.getLogger(SocketJob.class);
 	
-	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitortermico/AlertaRegistration";	
-	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitortermico/EquipamentoRegistration";
-	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitortermico/MedicaoRegistration";
+	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitorweb/AlertaRegistration";	
+	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitorweb/EquipamentoRegistration";
+	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitorweb/MedicaoRegistration";
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
