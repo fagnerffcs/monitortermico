@@ -48,7 +48,10 @@ public class Equipamento {
 	private double limiteInferiorUmidade;
 	
 	@Column(name="equ_limite_sup_umid")
-	private double limiteSuperiorUmidade;	
+	private double limiteSuperiorUmidade;
+	
+	@Column(name="equ_protocolo")
+	private String protocolo;
 
 	public Long getId() {
 		return id;
@@ -128,6 +131,14 @@ public class Equipamento {
 
 	public void setLimiteSuperiorUmidade(double limiteSuperiorUmidade) {
 		this.limiteSuperiorUmidade = limiteSuperiorUmidade;
+	}
+
+	public String getProtocolo() {
+		return protocolo;
+	}
+
+	public void setProtocolo(String protocolo) {
+		this.protocolo = protocolo;
 	}
 	
 }

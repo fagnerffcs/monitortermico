@@ -1,6 +1,7 @@
 package br.com.practicalsolutions.monitortermico.quartz;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Date;
@@ -19,7 +20,9 @@ import br.com.practicalsolutions.monitortermico.mail.Email;
 import br.com.practicalsolutions.monitortermico.model.Alerta;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
+import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.service.AlertaRegistration;
+import br.com.practicalsolutions.monitortermico.service.EquipamentoEJB;
 import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
 import br.com.practicalsolutions.monitortermico.service.MedicaoRegistration;
 
@@ -27,19 +30,18 @@ public class SocketJob implements Job {
 	
 	private Logger log = LoggerFactory.getLogger(SocketJob.class);
 	
-	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitortermico/AlertaRegistration";	
-	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitortermico/EquipamentoRegistration";
-	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitortermico/MedicaoRegistration";
+	private static final String ALERTA_REGISTRATION_LOOKUP = "java:global/monitorweb/AlertaRegistration";	
+	private static final String EQUIPAMENTO_REGISTRATION_LOOKUP = "java:global/monitorweb/EquipamentoRegistration";
+	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitorweb/MedicaoRegistration";
+	private static final String EQUIPAMENTO_EJB_LOOKUP = "java:global/monitorweb/EquipamentoEJB";
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		log.info("Job started...");
 		
-		Socket socket = null;
-		BufferedInputStream receive = null;
 		MedicaoRegistration medicaoRegistration = null;
 		EquipamentoRegistration equipamentoRegistration = null;
-		
+				  
 		try {
 			final Context con = new InitialContext();
 			medicaoRegistration = (MedicaoRegistration) con.lookup(MEDICAO_REGISTRATION_LOOKUP);
@@ -48,12 +50,22 @@ public class SocketJob implements Job {
 			for (Equipamento e : equipamentoRegistration.listarEquipamentos()) {
 				
 				try {
-					InetAddress address = InetAddress.getByName(e.getIp());
-					socket = new Socket(address, e.getPorta());
-					socket.sendUrgentData('a');
-					receive = new BufferedInputStream(socket.getInputStream());
 					byte data[] = new byte[10];
-					receive.read(data,0,data.length);
+					
+					//obtem os dados de acordo com o protocolo usado
+					if(e.getProtocolo().equals(Protocolo.EJB)){
+						data = getDataFromEJb();
+					} else if(e.getProtocolo().equals(Protocolo.JMS)){
+						data = getDataFromJms();
+					} else if(e.getProtocolo().equals(Protocolo.RMI)){
+						data = getDataFromRmi();
+					} else if(e.getProtocolo().equals("SOCKET")){
+						data = getDataFromSocket(e);
+					} else if(e.getProtocolo().equals("WEB-SERVICE")){
+						data = getDataFromWebService();
+					} else if(e.getProtocolo().equals("WEB-SOCKET")){
+						data = getDataFromWebSocket(); 
+					}
 					
 					String sinal = String.valueOf((char)data[1]);
 					String temp = String.format("%s%s.%s", String.valueOf((char)data[2]), 
@@ -86,12 +98,10 @@ public class SocketJob implements Job {
 						}
 					}
 					
-					receive.close();
-					socket.close();
 				} catch(Exception err){
 					log.info("Exception in accessing file");
 					err.printStackTrace();
-				}		
+				}
 
 			}
 			
@@ -102,6 +112,46 @@ public class SocketJob implements Job {
 		
 	}
 	
+	//TODO:implementar a obtencao de dados via RMI	
+	private byte[] getDataFromRmi() {
+		return null;
+	}
+
+	//TODO:implementar a obtencao de dados via JMS
+	private byte[] getDataFromJms() {
+		return null;
+	}
+
+	//TODO:implementar a obtencao de dados via web service
+	private byte[] getDataFromWebService() {
+		return null;
+	}
+
+	private byte[] getDataFromSocket(Equipamento e) throws IOException {
+		Socket socket = null;
+		BufferedInputStream receive = null;
+		byte[] data = new byte[10];
+		
+		InetAddress address = InetAddress.getByName(e.getIp());
+		socket = new Socket(address, e.getPorta());
+		socket.sendUrgentData('a');
+		receive = new BufferedInputStream(socket.getInputStream());
+		receive.read(data,0,data.length);	
+		
+		return data;
+	}
+
+	//TODO:implementar a obtencao dos dados via web socket
+	private byte[] getDataFromWebSocket() {
+		return null;
+	}
+
+	private byte[] getDataFromEJb() throws NamingException {
+		final Context con = new InitialContext();
+		EquipamentoEJB ejb = (EquipamentoEJB) con.lookup(EQUIPAMENTO_EJB_LOOKUP);
+		return ejb.sendData("a");
+	}
+
 	private void marcarAlertaComoEnviado(Long id) {
 		try {
 			final Context con = new InitialContext();
@@ -157,4 +207,6 @@ public class SocketJob implements Job {
 		}
 	}
 
+	
+	
 }
