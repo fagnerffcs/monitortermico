@@ -51,7 +51,8 @@ public class Equipamento {
 	private double limiteSuperiorUmidade;
 	
 	@Column(name="equ_protocolo")
-	private String protocolo;
+	@Enumerated(EnumType.STRING)
+	private Protocolo protocolo;
 
 	public Long getId() {
 		return id;
@@ -133,12 +134,13 @@ public class Equipamento {
 		this.limiteSuperiorUmidade = limiteSuperiorUmidade;
 	}
 
-	public String getProtocolo() {
+	public Protocolo getProtocolo() {
 		return protocolo;
 	}
 
-	public void setProtocolo(String protocolo) {
+	public void setProtocolo(Protocolo protocolo) {
 		this.protocolo = protocolo;
 	}
+
 	
 }

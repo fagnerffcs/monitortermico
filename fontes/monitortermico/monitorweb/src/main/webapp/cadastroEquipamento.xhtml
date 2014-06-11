@@ -29,9 +29,15 @@
 
 				<h:outputLabel for="status" value="Status:" />
 				<h:selectOneMenu id="status" value="#{novoEquipamento.status}">
-					<f:selectItems value="#{equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s.label}" />
+					<f:selectItems value="#{equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
+				
+				<h:outputLabel for="protocolo" value="Protocolo:" />
+				<h:selectOneMenu id="protocolo" value="#{novoEquipamento.protocolo}">
+					<f:selectItems value="#{equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p}" />
+				</h:selectOneMenu>
+				<h:message for="status" errorClass="invalid" />				
 				
 				<h:outputLabel for="minTemp" value="Limite Mínimo Temperatura:" />
 				<h:inputText id="minTemp" value="#{novoEquipamento.limiteInferiorTemperatura}" />

@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
+import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.model.Status;
 import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
 import br.com.practicalsolutions.monitortermico.service.MedicaoRegistration;
@@ -60,6 +61,9 @@ public class EquipamentoController {
     
     @SuppressWarnings("unused")
 	private Status[] status;
+    
+    @SuppressWarnings("unused")
+    private Protocolo[] protocolo;
 
     @Produces
     @Named
@@ -90,6 +94,14 @@ public class EquipamentoController {
 
 	public void setStatus(Status[] status) {
 		this.status = status;
+	}
+
+	public Protocolo[] getProtocolo() {
+		return Protocolo.values();
+	}
+
+	public void setProtocolo(Protocolo[] protocolo) {
+		this.protocolo = protocolo;
 	}
 
 	public String goDetail(Equipamento e){

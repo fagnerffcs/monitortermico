@@ -26,7 +26,7 @@
 		 	<p:growl id="msgs" showDetail="true" /> 
 		
 			<p:dataTable var="equipamento" value="#{equipamentos}" rendered="#{not empty equipamentos}"
-						 rowStyleClass="#{equipamento.status.label eq 'Ativo' ? 'active' : 'inactive'}">
+						 rowStyleClass="#{equipamento.status eq 'ATIVO' ? 'active' : 'inactive'}">
 	
 				<p:column style="width: 10%" >
 					<f:facet name="header">Id</f:facet>
