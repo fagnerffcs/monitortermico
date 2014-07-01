@@ -17,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 public class Equipamento {
 	
 	@Id
-	@SequenceGenerator(name="SEQUENCE_EQUIPAMENTO", sequenceName="SEQ_EQUIPAMENTO")
+	@SequenceGenerator(name="SEQUENCE_EQUIPAMENTO", sequenceName="SEQ_EQUIPAMENTO", allocationSize=10)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQUENCE_EQUIPAMENTO")
 	@Column(name="equ_codigo")
 	private Long id;
@@ -50,10 +50,10 @@ public class Equipamento {
 	@Column(name="equ_limite_sup_umid")
 	private double limiteSuperiorUmidade;
 	
-	@Column(name="equ_protocolo")
 	@Enumerated(EnumType.STRING)
+	@Column(name="equ_protocolo")
 	private Protocolo protocolo;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -140,6 +140,31 @@ public class Equipamento {
 
 	public void setProtocolo(Protocolo protocolo) {
 		this.protocolo = protocolo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Equipamento other = (Equipamento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	

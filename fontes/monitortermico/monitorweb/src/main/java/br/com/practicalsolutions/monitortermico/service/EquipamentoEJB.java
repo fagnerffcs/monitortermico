@@ -9,15 +9,18 @@ public class EquipamentoEJB {
 		
 		byte[] byteArray = new byte[10];			
 		if(val.equals("a")){
-			byteArray[1] = (byte) ('+');
+			byte signal = (byte) (Math.random() * 10);
+			if(signal >= 1){
+				signal = '+';
+			} else {
+				signal = '-';
+			}
+			//byte de sinal (+/-)
+			byteArray[1] = (byte) signal;
 			
-			byteArray[2] = (byte) (Math.random() * 10);
-			byteArray[3] = (byte) (Math.random() * 10);
-			byteArray[4] = (byte) (Math.random() * 10);
-			
-			byteArray[6] = (byte) (Math.random() * 10);
-			byteArray[7] = (byte) (Math.random() * 10);
-			byteArray[8] = (byte) (Math.random() * 10);
+			for (int i = 2; i <= 8; i++) {
+				byteArray[i] = (byte) (Math.random() * 10);	
+			}
 		}
 		
 		return byteArray;

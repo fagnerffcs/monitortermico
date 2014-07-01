@@ -59,11 +59,11 @@ public class EquipamentoController {
     
     static CartesianChartModel linearModel;
     
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private Status[] status;
     
-    @SuppressWarnings("unused")
-    private Protocolo[] protocolo;
+	@SuppressWarnings("unused")
+	private Protocolo[] protocolo;    
 
     @Produces
     @Named
@@ -227,5 +227,13 @@ public class EquipamentoController {
         
 		return linearModel;
 	}
+	
+	public void desativarEquipamento(Equipamento e){
+		equipamentoRegistration.desativarEquipamento(e);
+	}
+	
+	public void reativarEquipamento(Equipamento e){
+		equipamentoRegistration.reativarEquipamento(e);
+	}	
 	
 }

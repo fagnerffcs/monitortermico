@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 
@@ -19,7 +20,7 @@ public class EquipamentoRegistration {
     @Inject
     private Logger log;
 
-    @Inject
+    @PersistenceContext(unitName="primary")
     private EntityManager em;
 
     @Inject
@@ -38,5 +39,24 @@ public class EquipamentoRegistration {
     	List<Equipamento> lista = em.createQuery("select e from Equipamento e WHERE e.status = :status").setParameter("status", Status.ATIVO).getResultList();
     	return lista;
     }
+    
+    public Equipamento buscarPorId(Long id){
+    	Equipamento e = (Equipamento) em.createQuery("select e from Equipamento e WHERE e.id = :id").setParameter("id", id).getSingleResult();
+    	return e;
+    }
+    
+    public void desativarEquipamento(Equipamento e){
+    	log.info("Desativando equipamento: " + e.getDescricao());
+    	Session session = (Session) em.getDelegate();
+    	e.setStatus(Status.INATIVO);
+    	session.merge(e);
+    }
+    
+    public void reativarEquipamento(Equipamento e){
+    	log.info("Reativando equipamento: " + e.getDescricao());
+    	Session session = (Session) em.getDelegate();
+    	e.setStatus(Status.ATIVO);
+    	session.merge(e);
+    }    
 
 }

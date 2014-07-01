@@ -50,6 +50,7 @@
   <servlet-name>Faces Servlet</servlet-name>
   <url-pattern>*.xhtml</url-pattern>
  </servlet-mapping>
+ 
  <!-- Welcome page -->
  <welcome-file-list>
   <welcome-file>index.html</welcome-file>

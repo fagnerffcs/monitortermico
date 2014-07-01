@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 public class Alerta {
 	
 	@Id
-	@SequenceGenerator(name="SEQUENCE_ALERTA", sequenceName="SEQ_ALERTA")
+	@SequenceGenerator(name="SEQUENCE_ALERTA", sequenceName="SEQ_ALERTA", allocationSize=10)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQUENCE_ALERTA")
 	@Column(name="ale_codigo")
 	private Long id;

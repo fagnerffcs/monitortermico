@@ -14,8 +14,6 @@
    <name>Monitor Térmico</name>
    <description>Sistema de Controle de Termohigrometro</description>
 
-   
-
    <licenses>
       <license>
          <name>Apache License, Version 2.0</name>
@@ -24,11 +22,30 @@
       </license>
    </licenses>
    
+	<distributionManagement>
+		<repository>
+			<id>nexus.cindacta3</id>
+			<name>Cindacta III Nexus Server</name>
+			<url>http://nexus.cindacta3.intraer:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>   
+   
    <repositories>
 	<repository>
 		<id>primefaces</id>
-		<url>http://localhost:8081/nexus/content/repositories/primefaces/</url>
-	</repository>   
+		<url>http://nexus.cindacta3.intraer:8081/nexus/content/repositories/primefaces/</url>
+	</repository>
+	<repository>
+		<id>cindacta3.releases</id>
+		<name>Cindacta III Nexus Server</name>
+		<url>http://nexus.cindacta3.intraer:8081/nexus/content/repositories/releases/</url>
+	</repository>
+	<repository>
+		<id>jboss</id>
+		<name>jboss</name>
+		<url>http://nexus.cindacta3.intraer:8081/nexus/content/repositories/jboss/</url>
+	</repository>
+	
    </repositories>
 
    <properties>
@@ -39,12 +56,12 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want to import.  -->
       <jboss.bom.version>1.0.0.Final</jboss.bom.version>
-      <arquillian.version>1.0.0.CR7</arquillian.version>
       <jfreechart.version>1.0.13</jfreechart.version>
       <junit.version>4.10</junit.version>
       <primefaces.version>3.5</primefaces.version>
       <quartz.version>2.1.6</quartz.version>
       <servlet.version>2.5</servlet.version>
+      <jboss.home>/home/fagnerffcs/dev/jboss-as-7.1.1.Final/</jboss.home>
    </properties>
 
    <dependencyManagement>
@@ -62,6 +79,25 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+        
+        <!-- Arquillian -->
+        <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-bom</artifactId>
+            <version>1.1.5.Final</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+        
+        <!-- DRONE -->
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-bom</artifactId>
+            <version>1.0.0.Final</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>        
+        
       </dependencies>
    </dependencyManagement>
 
@@ -94,16 +130,14 @@
          <scope>provided</scope>
       </dependency>
 
-      <!-- Import the JPA API, we use provided scope as the API is included 
-         in JBoss AS 7 -->
+      <!-- Import the JPA API, we use provided scope as the API is included in JBoss AS 7 -->
       <dependency>
          <groupId>org.hibernate.javax.persistence</groupId>
          <artifactId>hibernate-jpa-2.0-api</artifactId>
          <scope>provided</scope>
       </dependency>
-
-      <!-- Import the EJB API, we use provided scope as the API is included 
-         in JBoss AS 7 -->
+      
+      <!-- Import the EJB API, we use provided scope as the API is included in JBoss AS 7 -->
       <dependency>
          <groupId>org.jboss.spec.javax.ejb</groupId>
          <artifactId>jboss-ejb-api_3.1_spec</artifactId>
@@ -125,8 +159,7 @@
          </exclusions>
       </dependency>
 
-      <!-- Import the JSF API, we use provided scope as the API is included 
-            in JBoss AS 7 -->
+      <!-- Import the JSF API, we use provided scope as the API is included in JBoss AS 7 -->
         <dependency>
             <groupId>org.jboss.spec.javax.faces</groupId>
             <artifactId>jboss-jsf-api_2.1_spec</artifactId>
@@ -157,14 +190,12 @@
       <dependency>
          <groupId>org.jboss.arquillian.junit</groupId>
          <artifactId>arquillian-junit-container</artifactId>
-         <version>${arquillian.version}</version>
          <scope>test</scope>
       </dependency>
       
       <dependency>
          <groupId>org.jboss.arquillian.protocol</groupId>
          <artifactId>arquillian-protocol-servlet</artifactId>
-         <version>${arquillian.version}</version>
          <scope>test</scope>               
       </dependency>
       
@@ -196,64 +227,73 @@
       <dependency>
         <groupId>javax.mail</groupId>
         <artifactId>mail</artifactId>
-      </dependency>	
+      </dependency>
+      
+	  <dependency>
+		<groupId>org.jboss.arquillian.container</groupId>
+		<artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+		<version>1.1.2.Final</version>
+		<scope>test</scope>
+	  </dependency>
+		
+	  <dependency>
+		<groupId>org.jboss.weld</groupId>
+		<artifactId>weld-core</artifactId>
+		<version>1.1.5.Final</version>
+		<scope>test</scope>
+	  </dependency>
+
+	  <dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.6.4</version>
+		<scope>test</scope>
+	  </dependency>
+		
+	  <dependency>
+		<groupId>org.jboss.shrinkwrap.descriptors</groupId>  
+		<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>  
+		<scope>test</scope>  
+      </dependency>
+      
+      <!-- Drone dependencies -->
+	  <dependency>
+		    <groupId>org.jboss.arquillian.junit</groupId>
+		    <artifactId>arquillian-junit-container</artifactId>
+		    <scope>test</scope>
+	  </dependency>
+	  <dependency>
+		    <groupId>org.jboss.arquillian.extension</groupId>
+		    <artifactId>arquillian-drone-impl</artifactId>
+		    <scope>test</scope>
+	  </dependency>
+		<dependency>
+		    <groupId>org.jboss.arquillian.extension</groupId>
+		    <artifactId>arquillian-drone-selenium</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss.arquillian.extension</groupId>
+		    <artifactId>arquillian-drone-selenium-server</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-server</artifactId>
+		    <scope>test</scope>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.mortbay.jetty</groupId>
+		            <artifactId>servlet-api-2.5</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>      
 	  
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-core</artifactId>
-      	<scope>provided</scope>
-      	<exclusions>
-      		<exclusion>
-      			<artifactId>xml-apis</artifactId>
-      			<groupId>xml-apis</groupId>
-      		</exclusion>
-      	</exclusions>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-entitymanager</artifactId>
-      	<scope>provided</scope>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-validator</artifactId>
-      	<scope>provided</scope>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-search</artifactId>
-      	<version>4.1.0.Final</version>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-core</artifactId>
-      	<scope>provided</scope>
-      	<exclusions>
-      		<exclusion>
-      			<artifactId>xml-apis</artifactId>
-      			<groupId>xml-apis</groupId>
-      		</exclusion>
-      	</exclusions>
-      	<optional>false</optional>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-entitymanager</artifactId>
-      	<scope>provided</scope>
-      	<optional>false</optional>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-validator</artifactId>
-      	<scope>provided</scope>
-      	<optional>false</optional>
-      </dependency>
-      <dependency>
-      	<groupId>org.hibernate</groupId>
-      	<artifactId>hibernate-search</artifactId>
-      	<version>4.1.0.Final</version>
-      	<optional>false</optional>
-      </dependency>
    </dependencies>
 
    <build>
@@ -280,6 +320,32 @@
                <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
          </plugin>
+         <!-- For Integration Tests -->
+		 <plugin>
+		    <artifactId>maven-surefire-plugin</artifactId>
+		    <version>2.17</version>
+		 </plugin>         
+		 <plugin>
+		 	<groupId>org.apache.maven.plugins</groupId>
+		 	<artifactId>maven-failsafe-plugin</artifactId>
+		 	<version>2.7.1</version>
+			<executions>
+		 		<execution>
+		  			<id>integration-test</id>
+		  			<phase>integration-test</phase>
+		  			<goals>
+		  				<goal>integration-test</goal>
+		  			</goals>
+		  		</execution>
+		  		<execution>
+		  			<id>verify</id>
+		  			<phase>verify</phase>
+		  			<goals>
+		  				<goal>verify</goal>
+		  			</goals>
+		  		</execution>
+			</executions>		 	
+		 </plugin>          
          <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
          <!-- To use, set the JBOSS_HOME environment variable and run: mvn 
             package jboss-as:deploy -->
@@ -288,6 +354,29 @@
             <artifactId>jboss-as-maven-plugin</artifactId>
             <version>7.1.1.Final</version>
          </plugin>
+         
+		 <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>unpack</id>
+                    <phase>process-test-classes</phase>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>org.jboss.as</groupId>
+                                <artifactId>jboss-as-dist</artifactId>
+                                <version>7.1.1.Final</version>
+                                <type>zip</type>
+                                <overWrite>false</overWrite>
+                                <outputDirectory>target</outputDirectory>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+         </plugin> 
+         
       </plugins>
    </build>
 
@@ -298,9 +387,11 @@
          <!-- Seperate profiles are provided for running all tests, including 
             Arquillian tests that execute in the specified container -->
          <id>default</id>
+         <!-- 
          <activation>
             <activeByDefault>true</activeByDefault>
          </activation>
+          -->
          <build>
             <plugins>
                <plugin>
@@ -320,14 +411,17 @@
          <!-- This profile will start a new JBoss AS instance, and execute 
             the test, shutting it down when done -->
          <!-- Run with: mvn clean test -Parq-jbossas-managed -->
-         <id>arq-jbossas-managed</id>
-         <dependencies>
+         <id>jbossas-managed</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>         
+         <dependencies>        
             <dependency>
                <groupId>org.jboss.as</groupId>
                <artifactId>jboss-as-arquillian-container-managed</artifactId>
                <version>7.1.1.Final</version>
-               <scope>test</scope>
-            </dependency>
+               <scope>provided</scope>
+            </dependency>       
          </dependencies>
       </profile>
 

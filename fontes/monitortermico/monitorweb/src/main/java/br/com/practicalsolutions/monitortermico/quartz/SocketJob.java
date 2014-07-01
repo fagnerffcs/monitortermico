@@ -20,6 +20,7 @@ import br.com.practicalsolutions.monitortermico.mail.Email;
 import br.com.practicalsolutions.monitortermico.model.Alerta;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
+import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.service.AlertaRegistration;
 import br.com.practicalsolutions.monitortermico.service.EquipamentoEJB;
 import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
@@ -51,34 +52,12 @@ public class SocketJob implements Job {
 				try {
 					byte data[] = new byte[10];
 					
-					//obtem os dados de acordo com o protocolo
-					switch (e.getProtocolo()) {
-					case EJB:
-						data = getDataFromEJb();
-						break;
-					case JMS:
-						data = getDataFromJms();
-						break;
-					case RMI:
-						data = getDataFromRmi();
-						break;
-					case SOCKET:
-						data = getDataFromSocket(e);
-						break;
-					case WEB_SERVICE:
-						data = getDataFromWebService();
-						break;
-					case WEB_SOCKET:
-						data = getDataFromWebSocket();
-						break;
-					}
-					
 					//obtem os dados de acordo com o protocolo usado
-					if(e.getProtocolo().equals("EJB")){
-						
-					} else if(e.getProtocolo().equals("JMS")){
+					if(e.getProtocolo().equals(Protocolo.EJB)){
+						data = getDataFromEJb();
+					} else if(e.getProtocolo().equals(Protocolo.JMS)){
 						data = getDataFromJms();
-					} else if(e.getProtocolo().equals("RMI")){
+					} else if(e.getProtocolo().equals(Protocolo.RMI)){
 						data = getDataFromRmi();
 					} else if(e.getProtocolo().equals("SOCKET")){
 						data = getDataFromSocket(e);
@@ -88,7 +67,7 @@ public class SocketJob implements Job {
 						data = getDataFromWebSocket(); 
 					}
 					
-					String sinal = String.valueOf(data[1]);
+					String sinal = String.valueOf((char)data[1]);
 					String temp = String.format("%s%s.%s", String.valueOf(data[2]), 
 														   String.valueOf(data[3]), 
 														   String.valueOf(data[4]));

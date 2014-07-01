@@ -16,7 +16,8 @@
 
 			<p:menubar>
 				<p:submenu label="Cadastro" icon="ui-icon-document">
-					<p:menuitem value="Equipamento" url="/cadastroEquipamento.jsf" />
+					<p:menuitem value="Equipamento" url="/equipamento/cadastroEquipamento.jsf" />
+					<p:menuitem value="Localidade" url="/localidade/cadastroLocalidade.jsf" />
 				</p:submenu>
 			</p:menubar>
 			
@@ -62,7 +63,7 @@
 			</p:dataTable>
 		</h:form>
 		
-    <p:dialog appendToBody="true" header="Equipamento" widgetVar="equipamentoDialog" resizable="false" id="equipDlg"  
+    <p:dialog appendTo="@(body)" header="Equipamento" widgetVar="equipamentoDialog" resizable="false" id="equipDlg"  
                 showEffect="fade" hideEffect="explode" modal="true">  
   	  <h:form id="dlgForm">
         <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  

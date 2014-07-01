@@ -28,10 +28,12 @@
   <PROCESS-ITEM ID="rules:#cadastroEquipamento.xhtml:0" NAME="item"
    PATH="/cadastroEquipamento.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="SUCESSO:#{equipamentoController.goDetail(equipamento)}:#equipamento_grafico.xhtml"
-    NAME="output" PATH="/equipamento_grafico.xhtml"
-    TARGET="rules:#equipamento_grafico.xhtml"
+    ID="SUCESSO:#{equipamentoController.goDetail(equipamento)}:#equipamento#equipamento_grafico.xhtml"
+    NAME="output" PATH="/equipamento/equipamento_grafico.xhtml"
+    TARGET="rules:#equipamento#equipamento_grafico.xhtml"
     TITLE="#{equipamentoController.goDetail(equipamento)}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#equipamento#equipamento_grafico.xhtml"
+  PATH="/equipamento/equipamento_grafico.xhtml" SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

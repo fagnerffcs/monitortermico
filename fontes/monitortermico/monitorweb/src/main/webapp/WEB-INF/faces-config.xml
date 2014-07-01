@@ -25,12 +25,17 @@
 	  <converter-class>javax.faces.convert.EnumConverter</converter-class>
 	</converter>
 	
+	<converter>
+	  <converter-for-class>br.com.practicalsolutions.monitortermico.model.Protocolo</converter-for-class>
+	  <converter-class>javax.faces.convert.EnumConverter</converter-class>
+	</converter>
+	
 	<navigation-rule>
-		 <from-view-id>/cadastroEquipamento.xhtml</from-view-id>
+		<from-view-id>/cadastroEquipamento.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{equipamentoController.goDetail(equipamento)}</from-action>
 			<from-outcome>SUCESSO</from-outcome>
-			<to-view-id>/equipamento_grafico.xhtml</to-view-id>
+			<to-view-id>/equipamento/equipamento_grafico.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

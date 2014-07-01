@@ -18,6 +18,12 @@
 				<h:outputLabel for="name" value="Descrição:" />
 				<h:inputText id="name" value="#{novoEquipamento.descricao}" />
 				<h:message for="name" errorClass="invalid" />
+				
+				<h:outputLabel for="protocolo" value="Protocolo:" />
+				<h:selectOneMenu id="protocolo" value="#{novoEquipamento.protocolo}">
+					<f:selectItems value="#{equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
+				</h:selectOneMenu>
+				<h:message for="protocolo" errorClass="invalid" />				
 
 				<h:outputLabel for="ip" value="IP:" />
 				<h:inputText id="ip" value="#{novoEquipamento.ip}" />
@@ -32,12 +38,6 @@
 					<f:selectItems value="#{equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
-				
-				<h:outputLabel for="protocolo" value="Protocolo:" />
-				<h:selectOneMenu id="protocolo" value="#{novoEquipamento.protocolo}">
-					<f:selectItems value="#{equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p}" />
-				</h:selectOneMenu>
-				<h:message for="status" errorClass="invalid" />				
 				
 				<h:outputLabel for="minTemp" value="Limite Mínimo Temperatura:" />
 				<h:inputText id="minTemp" value="#{novoEquipamento.limiteInferiorTemperatura}" />
@@ -73,43 +73,49 @@
 		</h:panelGroup>
 
 		<h:form>
-			<h:dataTable var="equipamento" value="#{equipamentos}"
-				rendered="#{not empty equipamentos}" styleClass="simpletablestyle"
-				>
+			<p:dataTable  var="equipamento" value="#{equipamentos}" editable="true"
+				rendered="#{not empty equipamentos}" >
 	
-				<p:column>
-					<f:facet name="header">Id</f:facet>
-		                #{equipamento.id}
-	            </p:column>
-	
-				<p:column>
+				<p:column sortBy="#{equipamento.descricao}" >
 					<f:facet name="header">Descrição</f:facet>
-		                #{equipamento.descricao}
+		            <h:outputText value="#{equipamento.descricao}" />
 	            </p:column>
 	
 				<p:column>
 					<f:facet name="header">IP</f:facet>
-		                #{equipamento.ip}
+		            <h:outputText value="#{equipamento.ip}" />
 	            </p:column>
 	
 				<p:column>
 					<f:facet name="header">Porta</f:facet>
-		                #{equipamento.porta}
+		            <h:outputText value="#{equipamento.porta}" />
 	            </p:column>
 	
 				<p:column>
 					<f:facet name="header">Status</f:facet>
-		                #{equipamento.status}
+		            <h:outputText value="#{equipamento.status}" />
 	            </p:column>
 	            
 	            <p:column>
 	            	<f:facet name="header">Gráfico</f:facet>
 	            	<h:commandLink action="#{equipamentoController.goDetail(equipamento)}">
-	            		<p:graphicImage value="resources/gfx/termometro.png" />
+	            		<p:graphicImage value="/resources/gfx/termometro.png" />
 	            	</h:commandLink>
 	            </p:column>
 	            
-			</h:dataTable>
+				<p:column>
+	            	<f:facet name="header"> Ativar/Desativar</f:facet>
+	            	<h:commandLink rendered="#{equipamento.status eq 'ATIVO'}" 
+	            				   actionListener="#{equipamentoController.desativarEquipamento(equipamento)}">
+	            		<p:graphicImage value="/resources/gfx/close.png" />
+	            	</h:commandLink>
+	            	<h:commandLink rendered="#{equipamento.status eq 'INATIVO'}" 
+	            				   actionListener="#{equipamentoController.reativarEquipamento(equipamento)}">
+	            		<p:graphicImage value="/resources/gfx/enable.png" />
+	            	</h:commandLink>	            	
+	            </p:column>	            
+	            
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
