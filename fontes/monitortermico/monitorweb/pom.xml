@@ -80,24 +80,6 @@
             <scope>import</scope>
         </dependency>
         
-        <!-- Arquillian -->
-        <dependency>
-            <groupId>org.jboss.arquillian</groupId>
-            <artifactId>arquillian-bom</artifactId>
-            <version>1.1.5.Final</version>
-            <scope>import</scope>
-            <type>pom</type>
-        </dependency>
-        
-        <!-- DRONE -->
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-drone-bom</artifactId>
-            <version>1.0.0.Final</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>        
-        
       </dependencies>
    </dependencyManagement>
 
@@ -187,18 +169,6 @@
       <!-- Optional, but highly recommended -->
       <!-- Arquillian allows you to test enterprise code such as EJBs and 
          Transactional(JTA) JPA from JUnit/TestNG -->
-      <dependency>
-         <groupId>org.jboss.arquillian.junit</groupId>
-         <artifactId>arquillian-junit-container</artifactId>
-         <scope>test</scope>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.jboss.arquillian.protocol</groupId>
-         <artifactId>arquillian-protocol-servlet</artifactId>
-         <scope>test</scope>               
-      </dependency>
-      
 	  <dependency>  
     	<groupId>org.primefaces</groupId>  
     	<artifactId>primefaces</artifactId>  
@@ -230,13 +200,6 @@
       </dependency>
       
 	  <dependency>
-		<groupId>org.jboss.arquillian.container</groupId>
-		<artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-		<version>1.1.2.Final</version>
-		<scope>test</scope>
-	  </dependency>
-		
-	  <dependency>
 		<groupId>org.jboss.weld</groupId>
 		<artifactId>weld-core</artifactId>
 		<version>1.1.5.Final</version>
@@ -250,50 +213,6 @@
 		<scope>test</scope>
 	  </dependency>
 		
-	  <dependency>
-		<groupId>org.jboss.shrinkwrap.descriptors</groupId>  
-		<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>  
-		<scope>test</scope>  
-      </dependency>
-      
-      <!-- Drone dependencies -->
-	  <dependency>
-		    <groupId>org.jboss.arquillian.junit</groupId>
-		    <artifactId>arquillian-junit-container</artifactId>
-		    <scope>test</scope>
-	  </dependency>
-	  <dependency>
-		    <groupId>org.jboss.arquillian.extension</groupId>
-		    <artifactId>arquillian-drone-impl</artifactId>
-		    <scope>test</scope>
-	  </dependency>
-		<dependency>
-		    <groupId>org.jboss.arquillian.extension</groupId>
-		    <artifactId>arquillian-drone-selenium</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.jboss.arquillian.extension</groupId>
-		    <artifactId>arquillian-drone-selenium-server</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-java</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-server</artifactId>
-		    <scope>test</scope>
-		    <exclusions>
-		        <exclusion>
-		            <groupId>org.mortbay.jetty</groupId>
-		            <artifactId>servlet-api-2.5</artifactId>
-		        </exclusion>
-		    </exclusions>
-		</dependency>      
-	  
    </dependencies>
 
    <build>
@@ -309,15 +228,6 @@
             <configuration>
                <source>1.6</source>
                <target>1.6</target>
-            </configuration>
-         </plugin>
-         <plugin>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>2.1.1</version>
-            <configuration>
-               <!-- Java EE 6 doesn't require web.xml, Maven needs to catch 
-                  up! -->
-               <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
          </plugin>
          <!-- For Integration Tests -->
