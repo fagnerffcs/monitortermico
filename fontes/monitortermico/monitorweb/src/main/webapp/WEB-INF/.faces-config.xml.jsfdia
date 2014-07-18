@@ -7,9 +7,9 @@
   <PROCESS-ITEM ID="rules:#equipamento_grafico.xhtml:0" NAME="item"
    PATH="/equipamento_grafico.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="SUCESSO:#{equipamentoController.voltar}:#cadastroEquipamento.xhtml"
-    NAME="output" PATH="/cadastroEquipamento.xhtml"
-    TARGET="rules:#cadastroEquipamento.xhtml"
+    ID="SUCESSO:#{equipamentoController.voltar}:#equipamento#cadastroEquipamento.xhtml"
+    NAME="output" PATH="/equipamento/cadastroEquipamento.xhtml"
+    TARGET="rules:#equipamento#cadastroEquipamento.xhtml"
     TITLE="#{equipamentoController.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
@@ -23,10 +23,12 @@
     TITLE="#{equipamentoController.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#cadastroEquipamento.xhtml"
-  PATH="/cadastroEquipamento.xhtml" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#cadastroEquipamento.xhtml:0" NAME="item"
-   PATH="/cadastroEquipamento.xhtml" model-entity="JSFProcessItem">
+ <PROCESS-ITEM NAME="rules:#equipamento#equipamento_grafico.xhtml"
+  PATH="/equipamento/equipamento_grafico.xhtml" SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#equipamento#cadastroEquipamento.xhtml"
+  PATH="/equipamento/cadastroEquipamento.xhtml" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#equipamento#cadastroEquipamento.xhtml:0"
+   NAME="item" PATH="/equipamento/cadastroEquipamento.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="SUCESSO:#{equipamentoController.goDetail(equipamento)}:#equipamento#equipamento_grafico.xhtml"
     NAME="output" PATH="/equipamento/equipamento_grafico.xhtml"
@@ -34,6 +36,4 @@
     TITLE="#{equipamentoController.goDetail(equipamento)}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#equipamento#equipamento_grafico.xhtml"
-  PATH="/equipamento/equipamento_grafico.xhtml" SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
