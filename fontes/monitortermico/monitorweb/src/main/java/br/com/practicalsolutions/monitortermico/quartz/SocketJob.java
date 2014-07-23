@@ -92,7 +92,7 @@ public class SocketJob implements Job {
 					   m.getUmidade() > e.getLimiteSuperiorUmidade() ||
 					   m.getUmidade() < e.getLimiteInferiorUmidade()){
 						Alerta a = registrarAlerta(e);
-						if(a!=null && a.getQtdeAlertas() > 3 && !a.isEnviado()){
+						if(a!=null && a.getQtdeAlertas() > e.getTolerancia() && !a.isEnviado()){
 							enviarAlerta(e, m);
 							marcarAlertaComoEnviado(e.getId());
 						}

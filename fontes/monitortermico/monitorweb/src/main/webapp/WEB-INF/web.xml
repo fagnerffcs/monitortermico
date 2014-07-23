@@ -60,7 +60,7 @@
        <web-resource-collection>  
             <web-resource-name>HtmlAuth</web-resource-name>  
             <description>Sistema de segurança</description>  
-            <url-pattern>/*</url-pattern>  
+            <url-pattern>/equipamento/*</url-pattern>  
             <http-method>GET</http-method>  
             <http-method>POST</http-method>  
        </web-resource-collection>  

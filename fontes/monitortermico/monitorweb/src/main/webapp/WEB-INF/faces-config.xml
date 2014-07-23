@@ -31,7 +31,7 @@
 	</converter>
 	
 	<navigation-rule>
-		<from-view-id>/equipamento/cadastroEquipamento.xhtml</from-view-id>
+		<from-view-id>index.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{equipamentoController.goDetail(equipamento)}</from-action>
 			<from-outcome>SUCESSO</from-outcome>

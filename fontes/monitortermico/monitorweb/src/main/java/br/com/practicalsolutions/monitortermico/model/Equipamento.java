@@ -54,6 +54,9 @@ public class Equipamento {
 	@Column(name="equ_protocolo")
 	private Protocolo protocolo;
 	
+	@Column(name="equ_tolerancia", nullable=true)
+	private int tolerancia;
+	
 	public Long getId() {
 		return id;
 	}
@@ -142,6 +145,14 @@ public class Equipamento {
 		this.protocolo = protocolo;
 	}
 
+	public int getTolerancia() {
+		return tolerancia;
+	}
+
+	public void setTolerancia(int tolerancia) {
+		this.tolerancia = tolerancia;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -167,5 +178,16 @@ public class Equipamento {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Equipamento [descricao=" + descricao + ", status=" + status
+				+ ", ip=" + ip + ", porta=" + porta
+				+ ", limiteInferiorTemperatura=" + limiteInferiorTemperatura
+				+ ", limiteSuperiorTemperatura=" + limiteSuperiorTemperatura
+				+ ", limiteInferiorUmidade=" + limiteInferiorUmidade
+				+ ", limiteSuperiorUmidade=" + limiteSuperiorUmidade
+				+ ", protocolo=" + protocolo + ", tolerancia=" + tolerancia
+				+ "]";
+	}
 	
 }

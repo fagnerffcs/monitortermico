@@ -54,6 +54,13 @@
 		                #{equipamento.status}
 	            </p:column>
 	            
+	            <p:column>
+	            	<f:facet name="header">Gráfico</f:facet>
+	            	<h:commandLink action="#{equipamentoController.goDetail(equipamento)}">
+	            		<p:graphicImage value="/resources/gfx/termometro.png" />
+	            	</h:commandLink>
+	            </p:column>	            
+	            
 		        <p:column style="width:4%">  
 		            <p:commandButton id="selectButton" update=":dlgForm:display" oncomplete="equipamentoDialog.show()" icon="ui-icon-search" title="Detalhes">
 		            	<f:setPropertyActionListener target="#{equipamentoController.selecionado}" value="#{equipamento}" />

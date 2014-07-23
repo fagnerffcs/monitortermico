@@ -55,6 +55,10 @@
 				<h:inputText id="maxUmid" value="#{novoEquipamento.limiteSuperiorUmidade}" />
 				<h:message for="maxUmid" errorClass="invalid" />												
 
+				<h:outputLabel for="tolerancia" value="Tolerância:" />
+				<h:inputText id="tolerancia" value="#{novoEquipamento.tolerancia}" />
+				<h:message for="tolerancia" errorClass="invalid" />
+
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
@@ -96,20 +100,13 @@
 		            <h:outputText value="#{equipamento.status}" />
 	            </p:column>
 	            
-	            <p:column>
-	            	<f:facet name="header">Gráfico</f:facet>
-	            	<h:commandLink action="#{equipamentoController.goDetail(equipamento)}">
-	            		<p:graphicImage value="/resources/gfx/termometro.png" />
-	            	</h:commandLink>
-	            </p:column>
-	            
 				<p:column>
 	            	<f:facet name="header"> Ativar/Desativar</f:facet>
 	            	<h:commandLink rendered="#{equipamento.status eq 'ATIVO'}" 
 	            				   actionListener="#{equipamentoController.desativarEquipamento(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/close.png" />
 	            	</h:commandLink>
-	            	<h:commandLink rendered="#{equipamento.status eq 'INATIVO'}" 
+	            	<h:commandLink rendered="#{equipamento.status eq 'INATIVO' or equipamento.status eq 'EM_MANUTENCAO'}" 
 	            				   actionListener="#{equipamentoController.reativarEquipamento(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/enable.png" />
 	            	</h:commandLink>	            	

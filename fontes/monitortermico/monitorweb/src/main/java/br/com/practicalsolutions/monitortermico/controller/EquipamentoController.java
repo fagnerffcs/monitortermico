@@ -75,7 +75,7 @@ public class EquipamentoController {
         try {
         	equipamentoRegistration.register(novoEquipamento);
             facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful"));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registration successful"));
             initNovoEquipamento();
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
