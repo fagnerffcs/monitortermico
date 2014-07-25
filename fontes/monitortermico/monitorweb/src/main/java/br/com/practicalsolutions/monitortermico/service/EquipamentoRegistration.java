@@ -1,7 +1,6 @@
 package br.com.practicalsolutions.monitortermico.service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -10,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Status;
@@ -17,8 +18,7 @@ import br.com.practicalsolutions.monitortermico.model.Status;
 @Stateless
 public class EquipamentoRegistration {
 	
-    @Inject
-    private Logger log;
+    private Logger log = LoggerFactory.getLogger(EquipamentoRegistration.class);
 
     @PersistenceContext(unitName="primary")
     private EntityManager em;
@@ -45,6 +45,13 @@ public class EquipamentoRegistration {
     	return e;
     }
     
+    public Equipamento buscarPorDescricao(String desc){
+    	Equipamento e = (Equipamento) em.createQuery("select e from Equipamento e WHERE e.descricao = :descricao")
+    									.setParameter("descricao", desc)
+    									.getSingleResult();
+    	return e;
+    }    
+    
     public void desativarEquipamento(Equipamento e){
     	log.info("Desativando equipamento: " + e.getDescricao());
     	Session session = (Session) em.getDelegate();
@@ -57,6 +64,10 @@ public class EquipamentoRegistration {
     	Session session = (Session) em.getDelegate();
     	e.setStatus(Status.ATIVO);
     	session.merge(e);
-    }    
+    }
+    
+    public void removerTodosOsEquipamentos(){
+    	em.createQuery("DELETE from Equipamento e").executeUpdate();
+    }
 
 }

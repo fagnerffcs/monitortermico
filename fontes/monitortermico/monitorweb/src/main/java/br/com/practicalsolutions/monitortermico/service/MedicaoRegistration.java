@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ public class MedicaoRegistration {
 	
 	private Logger log = LoggerFactory.getLogger(Medicao.class);
 	
-    @Inject
+	@PersistenceContext(unitName="primary")
     private EntityManager em;
 
     @Inject
@@ -61,6 +62,10 @@ public class MedicaoRegistration {
     			  .setMaxResults(qtde)
     			  .getResultList();
     	return lista;
-    }    
+    } 
+    
+    public void removerMedicoes(){
+    	em.createQuery("DELETE from Medicao m").executeUpdate();
+    }
 
 }
