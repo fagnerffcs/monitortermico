@@ -212,7 +212,7 @@ public class SocketJob implements Job {
 		
 		String[] enderecos = new String[eq.getSupervisores().size()];
 		for (int i = 0; i < enderecos.length; i++) {
-			enderecos[i] = eq.getSupervisores().get(i);
+			enderecos[i] = eq.getSupervisores().get(i).getEmail();
 		}
 
 		email.setTo(enderecos);

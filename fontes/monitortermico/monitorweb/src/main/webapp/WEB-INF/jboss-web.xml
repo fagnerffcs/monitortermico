@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<jboss-web>
+	<security-domain>java:/jaas/my_ldap_security_domain</security-domain>
+</jboss-web>

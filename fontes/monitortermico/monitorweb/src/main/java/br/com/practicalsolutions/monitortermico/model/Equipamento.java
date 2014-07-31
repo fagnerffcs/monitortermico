@@ -63,7 +63,7 @@ public class Equipamento {
 	private TipoAlerta tipoAlerta;
 	
 	@ManyToMany(mappedBy="equipamentos")
-	private List<String> supervisores;
+	private List<Supervisor> supervisores;
 	
 	public Long getId() {
 		return id;
@@ -169,11 +169,11 @@ public class Equipamento {
 		this.tipoAlerta = tipoAlerta;
 	}
 
-	public List<String> getSupervisores() {
+	public List<Supervisor> getSupervisores() {
 		return supervisores;
 	}
 
-	public void setSupervisores(List<String> supervisores) {
+	public void setSupervisores(List<Supervisor> supervisores) {
 		this.supervisores = supervisores;
 	}
 

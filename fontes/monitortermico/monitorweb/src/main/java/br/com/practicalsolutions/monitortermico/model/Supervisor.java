@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +23,7 @@ public class Supervisor {
 	@Column(name="sup_email")
 	private String email;
 	
-	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.ALL})
 	@JoinTable(name="Equipamento_Supervisor",
 			   joinColumns={@JoinColumn(name="sup_codigo")},
 			   inverseJoinColumns={@JoinColumn(name="equ_codigo")})
