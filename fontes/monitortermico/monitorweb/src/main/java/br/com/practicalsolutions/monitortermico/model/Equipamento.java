@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -56,6 +57,13 @@ public class Equipamento {
 	
 	@Column(name="equ_tolerancia", nullable=true)
 	private int tolerancia;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="equ_tipo_alerta")
+	private TipoAlerta tipoAlerta;
+	
+	@ManyToMany(mappedBy="equipamentos")
+	private List<String> supervisores;
 	
 	public Long getId() {
 		return id;
@@ -151,6 +159,22 @@ public class Equipamento {
 
 	public void setTolerancia(int tolerancia) {
 		this.tolerancia = tolerancia;
+	}
+
+	public TipoAlerta getTipoAlerta() {
+		return tipoAlerta;
+	}
+
+	public void setTipoAlerta(TipoAlerta tipoAlerta) {
+		this.tipoAlerta = tipoAlerta;
+	}
+
+	public List<String> getSupervisores() {
+		return supervisores;
+	}
+
+	public void setSupervisores(List<String> supervisores) {
+		this.supervisores = supervisores;
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.practicalsolutions.monitortermico.exception.SupervisorNaoCadastradoException;
 import br.com.practicalsolutions.monitortermico.mail.Email;
 import br.com.practicalsolutions.monitortermico.model.Alerta;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
@@ -178,11 +179,42 @@ public class SocketJob implements Job {
 	}
 
 	private void enviarAlerta(Equipamento eq, Medicao m){
+		try{
+			switch (eq.getTipoAlerta()) {
+			case EMAIL:
+				enviarAlertaPorEmail(eq, m);
+				break;
+			case SMS:
+				enviarAlertaPorSMS(eq, m);
+				break;
+			default:
+				enviarAlertaPorEmail(eq, m);
+				enviarAlertaPorSMS(eq, m);
+			}
+		} catch(SupervisorNaoCadastradoException e) {
+			log.error(e.getMessage());
+		}
+	}
+
+	//TODO:implementar envio via SMS
+	private void enviarAlertaPorSMS(Equipamento eq, Medicao m) {
+		
+	}
+
+	private void enviarAlertaPorEmail(Equipamento eq, Medicao m) throws SupervisorNaoCadastradoException {
 		Email email = new Email();
+		//TODO:configurar arquivo de properties / tabela de parametros
 		email.setFrom("monitortermico@cindacta3.intraer");
-		String[] enderecos = new String[2];
-		enderecos[0] = "rodrigorvq@cindacta3.intraer";
-		enderecos[1] = "fagnerffcs@cindacta3.intraer";
+		
+		if(eq.getSupervisores()==null || eq.getSupervisores().size()==0){
+			throw new SupervisorNaoCadastradoException();
+		}
+		
+		String[] enderecos = new String[eq.getSupervisores().size()];
+		for (int i = 0; i < enderecos.length; i++) {
+			enderecos[i] = eq.getSupervisores().get(i);
+		}
+
 		email.setTo(enderecos);
 		email.setSubject("Alerta monitor térmico");
 		StringBuilder message = new StringBuilder();
@@ -205,8 +237,7 @@ public class SocketJob implements Job {
 			log.error("Erro ao enviar email.");
 			log.error(e.getMessage());
 		}
+		
 	}
-
-	
 	
 }
