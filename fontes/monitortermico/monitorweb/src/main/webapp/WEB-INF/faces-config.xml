@@ -60,4 +60,24 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>/admin/cadastroEquipamento.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{equipamentoController.editar()}</from-action>
+			<from-outcome>SUCESSO</from-outcome>
+			<to-view-id>/admin/editarEquipamento.xhtml</to-view-id>
+			<redirect include-view-params="true" />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/admin/editarEquipamento.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{equipamentoController.voltar()}</from-action>
+			<from-outcome>SUCESSO</from-outcome>
+			<to-view-id>/admin/cadastroEquipamento.xhtml</to-view-id>
+			<redirect include-view-params="true" />
+		</navigation-case>
+	</navigation-rule>	
+	
 </faces-config>

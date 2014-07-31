@@ -39,6 +39,16 @@
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
 				
+				<h:outputLabel for="tipoAlerta" value="Forma de Alerta:" />
+				<h:selectOneMenu id="tipoAlerta" value="#{novoEquipamento.tipoAlerta}">
+					<f:selectItems value="#{equipamentoController.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+				</h:selectOneMenu>
+				<h:message for="tipoAlerta" errorClass="invalid" />
+
+				<h:outputLabel for="tolerancia" value="Limite de falha:" />
+				<p:spinner id="tolerancia" value="#{novoEquipamento.tolerancia}" min="0" max="10" />
+				<h:message for="tolerancia" errorClass="invalid" />
+				
 				<h:outputLabel for="minTemp" value="Limite Mínimo Temperatura:" />
 				<h:inputText id="minTemp" value="#{novoEquipamento.limiteInferiorTemperatura}" />
 				<h:message for="minTemp" errorClass="invalid" />
@@ -106,6 +116,13 @@
 	            				   actionListener="#{equipamentoController.reativarEquipamento(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/enable.png" />
 	            	</h:commandLink>	            	
+	            </p:column>
+	            
+	            <p:column>
+	            	<h:commandLink action="#{equipamentoController.editar()}" >
+	            		<p:graphicImage value="/resources/gfx/edit.png" />
+	            		<f:param value="#{equipamento.id}" name="id" />	
+	            	</h:commandLink>
 	            </p:column>	            
 	            
 			</p:dataTable>

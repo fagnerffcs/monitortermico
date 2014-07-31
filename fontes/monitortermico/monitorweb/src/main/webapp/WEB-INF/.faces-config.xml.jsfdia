@@ -31,4 +31,26 @@
     TITLE="#{equipamentoController.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#cadastroEquipamento.xhtml"
+  PATH="/admin/cadastroEquipamento.xhtml" SHAPE="64,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#admin#cadastroEquipamento.xhtml:0"
+   NAME="item" PATH="/admin/cadastroEquipamento.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SUCESSO:#{equipamentoController.editar()}:#admin#editarEquipamento.xhtml"
+    NAME="output" PATH="/admin/editarEquipamento.xhtml"
+    TARGET="rules:#admin#editarEquipamento.xhtml"
+    TITLE="#{equipamentoController.editar()}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin#editarEquipamento.xhtml"
+  PATH="/admin/editarEquipamento.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#admin#editarEquipamento.xhtml:0" NAME="item"
+   PATH="/admin/editarEquipamento.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SUCESSO:#{equipamentoController.voltar()}:#admin#cadastroEquipamento.xhtml"
+    NAME="output" PATH="/admin/cadastroEquipamento.xhtml"
+    TARGET="rules:#admin#cadastroEquipamento.xhtml"
+    TITLE="#{equipamentoController.voltar()}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

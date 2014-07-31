@@ -32,6 +32,7 @@ import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.model.Status;
+import br.com.practicalsolutions.monitortermico.model.TipoAlerta;
 import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
 import br.com.practicalsolutions.monitortermico.service.MedicaoRegistration;
 
@@ -59,33 +60,23 @@ public class EquipamentoController {
     
     static CartesianChartModel linearModel;
     
+    private Equipamento editado;
+    
 	@SuppressWarnings("unused")
 	private Status[] status;
     
 	@SuppressWarnings("unused")
-	private Protocolo[] protocolo;    
+	private Protocolo[] protocolo;
+	
+	@SuppressWarnings("unused")
+	private TipoAlerta[] tipoAlerta;
+	
+	private Long id;
 
     @Produces
     @Named
     public Equipamento getNovoEquipamento() {
         return novoEquipamento;
-    }
-
-    public void register() {
-        try {
-        	equipamentoRegistration.register(novoEquipamento);
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registration successful"));
-            initNovoEquipamento();
-        } catch (Exception e) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Not Registered due to error in data entered!", "Registration unsuccessful"));
-        }
-    }
-
-    @PostConstruct
-    public void initNovoEquipamento() {
-        novoEquipamento = new Equipamento();
     }
 
 	public Status[] getStatus() {
@@ -104,13 +95,12 @@ public class EquipamentoController {
 		this.protocolo = protocolo;
 	}
 
-	public String goDetail(Equipamento e){
-		selecionado = e;
-		return "SUCESSO";
+	public TipoAlerta[] getTipoAlerta() {
+		return TipoAlerta.values();
 	}
-	
-	public String voltar(){
-		return "SUCESSO";
+
+	public void setTipoALerta(TipoAlerta[] tipoAlerta) {
+		this.tipoAlerta = tipoAlerta;
 	}
 
 	public Equipamento getSelecionado() {
@@ -137,6 +127,42 @@ public class EquipamentoController {
 		this.umidadeChart = umidadeChart;
 	}	
 
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Equipamento getEditado() {
+		if(id!=null){
+			editado = equipamentoRegistration.buscarPorId(id);
+		}
+		return editado;
+	}
+
+	public void setEditado(Equipamento editado) {
+		this.editado = editado;
+	}
+
+	public void register() {
+        try {
+        	equipamentoRegistration.register(novoEquipamento);
+            facesContext.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registration successful"));
+            initNovoEquipamento();
+        } catch (Exception e) {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Not Registered due to error in data entered!", "Registration unsuccessful"));
+        }
+    }
+
+    @PostConstruct
+    public void initNovoEquipamento() {
+        novoEquipamento = new Equipamento();
+    }
+	
 	public DefaultStreamedContent buildTemperaturaChart(Long id) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		if(medicaoRegistration!=null){
@@ -228,12 +254,25 @@ public class EquipamentoController {
 		return linearModel;
 	}
 	
+	public String goDetail(Equipamento e){
+		selecionado = e;
+		return "SUCESSO";
+	}
+	
+	public String voltar(){
+		return "SUCESSO";
+	}
+	
 	public void desativarEquipamento(Equipamento e){
 		equipamentoRegistration.desativarEquipamento(e);
 	}
 	
 	public void reativarEquipamento(Equipamento e){
 		equipamentoRegistration.reativarEquipamento(e);
-	}	
+	}
+	
+	public String editar(){
+		return "SUCESSO";
+	}
 	
 }
