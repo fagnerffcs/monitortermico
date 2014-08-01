@@ -14,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Equipamento {
 	
@@ -63,6 +66,7 @@ public class Equipamento {
 	private TipoAlerta tipoAlerta;
 	
 	@ManyToMany(mappedBy="equipamentos")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Supervisor> supervisores;
 	
 	public Long getId() {

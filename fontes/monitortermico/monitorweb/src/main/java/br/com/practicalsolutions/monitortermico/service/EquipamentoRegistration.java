@@ -70,4 +70,8 @@ public class EquipamentoRegistration {
     	em.createQuery("DELETE from Equipamento e").executeUpdate();
     }
 
+	public void atualizar(Equipamento equipamento) {
+		em.merge(equipamento);
+	}    
+    
 }

@@ -161,6 +161,7 @@ public class EquipamentoController {
     @PostConstruct
     public void initNovoEquipamento() {
         novoEquipamento = new Equipamento();
+        editado = new Equipamento();
     }
 	
 	public DefaultStreamedContent buildTemperaturaChart(Long id) {

@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Supervisor {
 	
@@ -23,10 +26,14 @@ public class Supervisor {
 	@Column(name="sup_email")
 	private String email;
 	
+	@Column(name="sup_nome")
+	private String nome;
+	
 	@ManyToMany(cascade={CascadeType.ALL})
 	@JoinTable(name="Equipamento_Supervisor",
 			   joinColumns={@JoinColumn(name="sup_codigo")},
 			   inverseJoinColumns={@JoinColumn(name="equ_codigo")})
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Equipamento> equipamentos;
 
 	public Long getId() {
@@ -51,6 +58,14 @@ public class Supervisor {
 
 	public void setEquipamentos(List<Equipamento> equipamentos) {
 		this.equipamentos = equipamentos;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
