@@ -37,6 +37,15 @@ public class LocalidadeRegistration {
 	public List<Localidade> listarLocalidades(){
     	List<Localidade> lista = em.createQuery("SELECT l FROM Localidade l").getResultList();
     	return lista;
-    }    
+    }
+    
+    public Localidade buscarPorId(Long id){
+    	Localidade l = (Localidade) em.createQuery("select l from Localidade l WHERE l.id = :id").setParameter("id", id).getSingleResult();
+    	return l;
+    }
+    
+    public void atualizar(Localidade localidade){
+    	em.merge(localidade);
+    }
 
 }

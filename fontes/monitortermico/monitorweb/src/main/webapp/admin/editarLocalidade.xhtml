@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+	
+		<f:metadata>
+		    <f:viewParam name="localidade" value="#{localidadeEdit.localidade}" converter="#{localidadeConverter}" />
+		</f:metadata>	
+	
+		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
+			<p:breadCrumb style="width:510px;">
+				<p:menuitem title="Início" value="Home" url="/index.jsf" />
+			</p:breadCrumb>
+		</h:form>
+		<h:form id="reg">
+			<h2>Atualizar Localidade</h2>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="Descrição:" />
+				<h:inputText id="name" value="#{localidadeEdit.localidade.descricao}" />
+				<h:message for="name" errorClass="invalid" />
+				
+				<h:outputLabel for="equipamentos" value="Equipamentos:" />
+				<p:selectManyMenu id="equipamentos" value="#{localidadeEdit.localidade.equipamentos}" converter="#{equipamentoConverter}">
+					<f:selectItems value="#{localidadeController.listarEquipamentos()}" var="e" 
+								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
+								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
+					</f:selectItems>
+				</p:selectManyMenu>
+				<h:message for="equipamentos" errorClass="invalid" />				
+
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{localidadeEdit.salvarLocalidade()}" value="Atualizar"
+							styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

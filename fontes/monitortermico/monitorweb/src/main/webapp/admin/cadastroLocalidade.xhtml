@@ -20,7 +20,7 @@
 				<h:message for="name" errorClass="invalid" />
 				
 				<h:outputLabel for="equipamentos" value="Equipamentos:" />
-				<p:selectManyMenu id="equipamentos" value="#{novaLocalidade.equipamentos}" converter="equipamentoConverter">
+				<p:selectManyMenu id="equipamentos" value="#{novaLocalidade.equipamentos}" converter="#{equipamentoConverter}">
 					<f:selectItems value="#{localidadeController.listarEquipamentos()}" var="e" 
 								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
 								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
@@ -55,7 +55,6 @@
 	            </p:column>
 
 				<p:subTable var="equipamento" value="#{localidade.equipamentos}" >
-				
 					<f:facet name="header">
 						<h:outputText value="#{equipamento.descricao}" />
 					</f:facet>
@@ -66,8 +65,15 @@
 					<p:column>
 						<h:outputText value="#{equipamento.status}" />
 					</p:column>
-				
-				</p:subTable>		            
+				</p:subTable>
+				<p:column>
+	            	<f:facet name="header"> Editar</f:facet>
+	            	<h:link outcome="/admin/editarLocalidade.xhtml" >
+	            		<p:graphicImage value="/resources/gfx/edit.png" />
+	            		<f:param name="localidade" value="#{localidade.id}" />
+	            	</h:link>	            	
+	            </p:column>
+						            
 			</h:dataTable>
 		</h:form>
 	</ui:define>

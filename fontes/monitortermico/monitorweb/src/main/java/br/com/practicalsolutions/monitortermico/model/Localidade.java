@@ -12,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Localidade {
 	
@@ -26,6 +29,7 @@ public class Localidade {
 	
 	@OneToMany
 	@JoinTable(name="localidade_equipamento", joinColumns={@JoinColumn(name="loc_codigo")}, inverseJoinColumns={@JoinColumn(name="equ_codigo")})
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Equipamento> equipamentos;
 
 	public Long getId() {
