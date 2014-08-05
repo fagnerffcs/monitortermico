@@ -1,12 +1,19 @@
 package br.com.practicalsolutions.monitortermico.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Alerta {
@@ -18,13 +25,22 @@ public class Alerta {
 	private Long id;
 	
 	@OneToOne
+	@JoinColumn(name="equ_codigo", nullable=true)
 	private Equipamento equipamento;
+	
+	@Column(name="ale_dt_envio")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataEnvio;
 	
 	@Column(name="ale_qtde_alerta")
 	private int qtdeAlertas;
 	
 	@Column(name="ale_enviado")
 	private boolean enviado;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="ale_status")
+	private Situacao status;
 
 	public Long getId() {
 		return id;
@@ -42,6 +58,14 @@ public class Alerta {
 		this.equipamento = equipamento;
 	}
 
+	public Date getDataEnvio() {
+		return dataEnvio;
+	}
+
+	public void setDataEnvio(Date dataEnvio) {
+		this.dataEnvio = dataEnvio;
+	}
+
 	public int getQtdeAlertas() {
 		return qtdeAlertas;
 	}
@@ -56,5 +80,13 @@ public class Alerta {
 
 	public void setEnviado(boolean enviado) {
 		this.enviado = enviado;
+	}
+
+	public Situacao getStatus() {
+		return status;
+	}
+
+	public void setStatus(Situacao status) {
+		this.status = status;
 	}
 }

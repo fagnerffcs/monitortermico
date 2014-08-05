@@ -52,6 +52,5 @@ public class LocalidadeEdit {
 	public String voltar(){
 		return "cadastroLocalidade.xhtml?faces-redirect=true";
 	}
-	
 
 }

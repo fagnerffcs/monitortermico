@@ -29,8 +29,7 @@
 	  <converter-for-class>br.com.practicalsolutions.monitortermico.model.Protocolo</converter-for-class>
 	  <converter-class>javax.faces.convert.EnumConverter</converter-class>
 	</converter>
-
-	<!-- 
+ 
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
@@ -51,6 +50,7 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<!--	
 	<navigation-rule>
 		<from-view-id>/equipamento/equipamento.xhtml</from-view-id>
 		<navigation-case>

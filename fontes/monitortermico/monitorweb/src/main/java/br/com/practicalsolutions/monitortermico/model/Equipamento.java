@@ -2,6 +2,7 @@ package br.com.practicalsolutions.monitortermico.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -65,6 +67,10 @@ public class Equipamento {
 	@Column(name="equ_tipo_alerta")
 	private TipoAlerta tipoAlerta;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Localidade localidade;
+	
+	@SuppressWarnings("rawtypes")
 	@ManyToMany(mappedBy="equipamentos")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Supervisor> supervisores;
@@ -173,10 +179,12 @@ public class Equipamento {
 		this.tipoAlerta = tipoAlerta;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List<Supervisor> getSupervisores() {
 		return supervisores;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setSupervisores(List<Supervisor> supervisores) {
 		this.supervisores = supervisores;
 	}
@@ -216,6 +224,14 @@ public class Equipamento {
 				+ ", limiteSuperiorUmidade=" + limiteSuperiorUmidade
 				+ ", protocolo=" + protocolo + ", tolerancia=" + tolerancia
 				+ "]";
+	}
+
+	public Localidade getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(Localidade localidade) {
+		this.localidade = localidade;
 	}
 	
 }

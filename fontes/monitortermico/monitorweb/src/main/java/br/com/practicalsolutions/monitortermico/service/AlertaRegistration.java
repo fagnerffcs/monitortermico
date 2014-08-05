@@ -28,7 +28,7 @@ public class AlertaRegistration {
 
     public Alerta register(Long id) throws Exception {
     	Equipamento equipamento = (Equipamento) em.createQuery("SELECT e FROM Equipamento e where e.id = :id").setParameter("id", id).getSingleResult();
-        log.info("Registering new alert for " + equipamento.getDescricao());
+        log.info("Registrando novo alerta para " + equipamento.getDescricao());
 
         Session session = (Session) em.getDelegate();
         Alerta alerta = findAlertByEquip(equipamento.getId());

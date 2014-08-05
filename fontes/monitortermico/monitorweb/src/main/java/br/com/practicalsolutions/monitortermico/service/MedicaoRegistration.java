@@ -28,7 +28,7 @@ public class MedicaoRegistration {
     private Event<Medicao> memberEventSrc;
 
     public void register(Medicao medicao) throws Exception {
-        log.info("Registering " + medicao.toString());
+        log.info("Registrando " + medicao.toString());
 
         Session session = (Session) em.getDelegate();
         session.persist(medicao);

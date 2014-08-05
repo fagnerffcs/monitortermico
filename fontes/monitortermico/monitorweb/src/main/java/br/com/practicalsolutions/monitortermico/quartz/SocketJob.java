@@ -207,7 +207,7 @@ public class SocketJob implements Job {
 		email.setFrom("monitortermico@cindacta3.intraer");
 		
 		if(eq.getSupervisores()==null || eq.getSupervisores().size()==0){
-			throw new SupervisorNaoCadastradoException();
+			throw new SupervisorNaoCadastradoException(eq);
 		}
 		
 		String[] enderecos = new String[eq.getSupervisores().size()];

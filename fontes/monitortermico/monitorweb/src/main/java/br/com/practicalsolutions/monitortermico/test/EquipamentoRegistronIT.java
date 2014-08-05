@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
+import br.com.practicalsolutions.monitortermico.model.Localidade;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.model.Status;
@@ -41,17 +42,11 @@ public class EquipamentoRegistronIT {
 										   	   Status.class,
 										   	   Medicao.class,
 										   	   TipoAlerta.class,
-										   	   Supervisor.class)
+										   	   Supervisor.class,
+										   	   Localidade.class)
 								   .addAsResource("META-INF/persistence.xml")
 								   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 		return war;
-	}
-	
-	@Test
-	public void testeRemoverTodos(){
-		medicaoRegistration.removerMedicoes();
-		equipamentoRegistration.removerTodosOsEquipamentos();
-		Assert.assertTrue(equipamentoRegistration.listarEquipamentos().size()==0);
 	}
 	
 	@Test
@@ -76,11 +71,16 @@ public class EquipamentoRegistronIT {
 	
 	@Test
 	public void testeDesativar(){
-		testeRemoverTodos();
-		testeInserir();
 		Equipamento e = equipamentoRegistration.buscarPorDescricao("EQU-TESTE-01");
 		equipamentoRegistration.desativarEquipamento(e);
 		Assert.assertEquals(Status.INATIVO, e.getStatus());
 	}
+	
+	@Test
+	public void testeRemoverTodos(){
+		medicaoRegistration.removerMedicoes();
+		equipamentoRegistration.removerTodosOsEquipamentos();
+		Assert.assertTrue(equipamentoRegistration.listarEquipamentos().size()==0);
+	}	
 
 }

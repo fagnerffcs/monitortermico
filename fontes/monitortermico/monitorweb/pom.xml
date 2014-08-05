@@ -59,7 +59,7 @@
       <jfreechart.version>1.0.13</jfreechart.version>
       <junit.version>4.10</junit.version>
       <primefaces.version>3.5</primefaces.version>
-      <quartz.version>2.1.6</quartz.version>
+      <quartz.version>2.1.7</quartz.version>
       <servlet.version>2.5</servlet.version>
       <shrinkwrap.version>2.1.1</shrinkwrap.version>
       <arquillian.version>1.1.5.Final</arquillian.version>
@@ -210,6 +210,18 @@
 		<version>1.6.4</version>
 		<scope>test</scope>
 	  </dependency>
+	  
+	  <dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>1.0.13</version>
+	 </dependency>
+	 
+	  <dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-core</artifactId>
+	    <version>1.0.13</version>
+	 </dependency>		 	  
 	  
 	  <!-- Arquillian Dependencies -->
 	  <dependency>

@@ -15,6 +15,7 @@
 		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
 			<p:breadCrumb style="width:510px;">
 				<p:menuitem title="Início" value="Home" url="/index.jsf" />
+				<p:menuitem title="Cadastro" value="Cadastro" url="/admin/cadastroLocalidade.jsf" />
 			</p:breadCrumb>
 		</h:form>
 		<h:form id="reg">
@@ -25,7 +26,7 @@
 				<h:message for="name" errorClass="invalid" />
 				
 				<h:outputLabel for="equipamentos" value="Equipamentos:" />
-				<p:selectManyMenu id="equipamentos" value="#{localidadeEdit.localidade.equipamentos}" converter="#{equipamentoConverter}">
+				<p:selectManyMenu id="equipamentos" value="#{localidadeEdit.localidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
 					<f:selectItems value="#{localidadeController.listarEquipamentos()}" var="e" 
 								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
 								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
@@ -38,6 +39,11 @@
 						<h:commandButton id="register"
 							action="#{localidadeEdit.salvarLocalidade()}" value="Atualizar"
 							styleClass="register" />
+							
+						<h:commandButton id="btnBack"
+							action="#{localidadeEdit.voltar()}" value="Voltar"
+							styleClass="register" />							
+							
 						<h:messages styleClass="messages" errorClass="invalid"
 							infoClass="valid" warnClass="warning" globalOnly="true" />
 					</h:panelGrid>

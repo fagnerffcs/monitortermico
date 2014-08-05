@@ -16,7 +16,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-public class Supervisor {
+public class Supervisor<T> {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -66,6 +66,11 @@ public class Supervisor {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public String toString() {
+		return "Supervisor [email=" + email + ", nome=" + nome + "]";
 	}
 
 }

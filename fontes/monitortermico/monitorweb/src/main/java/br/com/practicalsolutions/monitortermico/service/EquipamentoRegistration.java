@@ -68,6 +68,7 @@ public class EquipamentoRegistration {
     
     public void removerTodosOsEquipamentos(){
     	em.createQuery("DELETE from Equipamento e").executeUpdate();
+    	em.flush();
     }
 
 	public void atualizar(Equipamento equipamento) {

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -27,10 +25,9 @@ public class Localidade {
 	@Column(name="loc_descricao")
 	private String descricao;
 	
-	@OneToMany
-	@JoinTable(name="localidade_equipamento", joinColumns={@JoinColumn(name="loc_codigo")}, inverseJoinColumns={@JoinColumn(name="equ_codigo")})
+	@OneToMany(mappedBy="localidade")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Equipamento> equipamentos;
+	private List<Equipamento> equipamentosSupervisionados;
 
 	public Long getId() {
 		return id;
@@ -40,20 +37,21 @@ public class Localidade {
 		this.id = id;
 	}
 
-	public List<Equipamento> getEquipamentos() {
-		return equipamentos;
-	}
-
-	public void setEquipamentos(List<Equipamento> equipamentos) {
-		this.equipamentos = equipamentos;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Equipamento> getEquipamentosSupervisionados() {
+		return equipamentosSupervisionados;
+	}
+
+	public void setEquipamentosSupervisionados(
+			List<Equipamento> equipamentosSupervisionados) {
+		this.equipamentosSupervisionados = equipamentosSupervisionados;
 	}
 
 }
