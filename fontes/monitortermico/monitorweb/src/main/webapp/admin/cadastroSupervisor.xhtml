@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
+			<p:breadCrumb style="width:510px;">
+				<p:menuitem title="Início" value="Home" url="/index.jsf" />
+			</p:breadCrumb>
+		</h:form>
+		<h:form id="reg">
+			<h2>Cadastro de Supervisores</h2>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="Nome:" />
+				<h:inputText id="name" value="#{novoSupervisor.nome}" />
+				<h:message for="name" errorClass="invalid" />
+				
+				<h:outputLabel for="email" value="Email:" />
+				<h:inputText id="email" value="#{novoSupervisor.email}" />
+				<h:message for="email" errorClass="invalid" />
+				
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{supervisorController.register}" value="Inserir"
+							styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:panelGrid>
+		</h:form>
+		
+		<h2>Supervisores</h2>
+		<h:panelGroup rendered="#{empty supervisores}">
+			<em>Nenhum supervisor registrado.</em>
+		</h:panelGroup>
+
+		<h:form>
+			<h:dataTable var="supervisor" value="#{supervisores}"
+				rendered="#{not empty supervisores}" styleClass="simpletablestyle">
+	
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+		            <h:outputText value="#{supervisor.nome}" />
+	            </p:column>
+	            
+				<p:column>
+					<f:facet name="header">Email</f:facet>
+		            <h:outputText value="#{supervisor.email}" />
+	            </p:column>	            
+
+				<p:column>
+	            	<f:facet name="header">Editar</f:facet>
+	            	<h:link outcome="/admin/editarSupervisor.xhtml" >
+	            		<p:graphicImage value="/resources/gfx/edit.png" />
+	            		<f:param name="supervisor" value="#{supervisor.id}" />
+	            	</h:link>	            	
+	            </p:column>
+						            
+			</h:dataTable>
+		</h:form>		
+
+	</ui:define>
+</ui:composition>

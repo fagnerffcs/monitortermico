@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+	
+		<f:metadata>
+		    <f:viewParam name="supervisor" value="#{supervisorEdit.supervisor}" converter="#{supervisorConverter}" />
+		</f:metadata>	
+	
+		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
+			<p:breadCrumb style="width:510px;">
+				<p:menuitem title="Início" value="Home" url="/index.jsf" />
+				<p:menuitem title="Cadastro" value="Cadastro" url="/admin/cadastroSupervisor.jsf" />
+			</p:breadCrumb>
+		</h:form>
+		<h:form id="reg">
+			<h2>Atualizar Supervisor</h2>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="Nome:" />
+				<h:inputText id="name" value="#{supervisorEdit.supervisor.nome}" />
+				<h:message for="name" errorClass="invalid" />
+
+				<h:outputLabel for="email" value="Email:" />
+				<h:inputText id="email" value="#{supervisorEdit.supervisor.email}" />
+				<h:message for="email" errorClass="invalid" />
+				
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{supervisorEdit.salvar()}" value="Atualizar"
+							styleClass="register" />
+							
+						<h:commandButton id="btnBack"
+							action="#{supervisorEdit.voltar()}" value="Voltar"
+							styleClass="register" />							
+							
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
