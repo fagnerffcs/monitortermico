@@ -21,7 +21,7 @@
 				
 				<h:outputLabel for="equipamentos" value="Equipamentos:" />
 				<p:selectManyMenu id="equipamentos" value="#{localidadeEdit.localidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
-					<f:selectItems value="#{localidadeController.listarEquipamentos()}" var="e" 
+					<f:selectItems value="#{fachada.localidadeController.listarEquipamentos()}" var="e" 
 								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
 								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
 					</f:selectItems>
@@ -31,7 +31,7 @@
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
-							action="#{localidadeController.register}" value="Inserir"
+							action="#{fachada.localidadeController.register}" value="Inserir"
 							styleClass="register" />
 						<h:messages styleClass="messages" errorClass="invalid"
 							infoClass="valid" warnClass="warning" globalOnly="true" />
