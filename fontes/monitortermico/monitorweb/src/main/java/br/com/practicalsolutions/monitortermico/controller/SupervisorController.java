@@ -10,21 +10,21 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroSupervisor;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
-import br.com.practicalsolutions.monitortermico.service.SupervisorRegistration;
 
 @Model
+@SuppressWarnings("rawtypes")
 public class SupervisorController {
 	
 	@Inject
     private FacesContext facesContext;
 
 	@Inject
-	private SupervisorRegistration supervisorRegistration;
+	private CadastroSupervisor supervisorRegistration;
 	
 	private Supervisor novoSupervisor;
     
-    @SuppressWarnings("unused")
 	@Produces
     @Named
 	private Supervisor getNovoSupervisor(){

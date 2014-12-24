@@ -10,10 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroEquipamento;
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroLocalidade;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
-import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
-import br.com.practicalsolutions.monitortermico.service.LocalidadeRegistration;
 
 @Model
 public class LocalidadeController {
@@ -22,10 +22,10 @@ public class LocalidadeController {
     private FacesContext facesContext;
 
     @Inject
-    private LocalidadeRegistration localidadeRegistration;
+    private CadastroLocalidade localidadeRegistration;
     
     @Inject
-    private EquipamentoRegistration equipamentoRegistration;
+    private CadastroEquipamento equipamentoRegistration;
 
     private Localidade novaLocalidade;
 

@@ -33,7 +33,7 @@
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{equipamentoController.goDetail(equipamento)}</from-action>
+			<from-action>#{fachada.equipamentoController.goDetail(equipamento)}</from-action>
 			<from-outcome>SUCESSO</from-outcome>
 			<to-view-id>/equipamento/equipamento_grafico.xhtml</to-view-id>
 			<redirect />

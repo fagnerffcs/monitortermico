@@ -12,6 +12,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroEquipamento;
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroMedicao;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
@@ -19,24 +21,22 @@ import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.model.Status;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
 import br.com.practicalsolutions.monitortermico.model.TipoAlerta;
-import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
-import br.com.practicalsolutions.monitortermico.service.MedicaoRegistration;
 
 @RunWith(Arquillian.class)
 public class EquipamentoRegistronIT {
 
 	@Inject
-	private EquipamentoRegistration equipamentoRegistration;
+	private CadastroEquipamento equipamentoRegistration;
 	
 	@Inject
-	private MedicaoRegistration medicaoRegistration;
+	private CadastroMedicao medicaoRegistration;
 	
 	@Deployment
 	public static WebArchive createDeployment(){
 		
 		WebArchive war = ShrinkWrap.create(WebArchive.class, "monitorweb-test.war")
-								   .addClasses(EquipamentoRegistration.class,
-										   	   MedicaoRegistration.class,
+								   .addClasses(CadastroEquipamento.class,
+										   	   CadastroMedicao.class,
 										   	   Equipamento.class,
 										   	   Protocolo.class,
 										   	   Status.class,

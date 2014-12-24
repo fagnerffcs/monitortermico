@@ -28,13 +28,13 @@ import org.primefaces.model.chart.LineChartSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroEquipamento;
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroMedicao;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 import br.com.practicalsolutions.monitortermico.model.Protocolo;
 import br.com.practicalsolutions.monitortermico.model.Status;
 import br.com.practicalsolutions.monitortermico.model.TipoAlerta;
-import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
-import br.com.practicalsolutions.monitortermico.service.MedicaoRegistration;
 
 @Model
 public class EquipamentoController {
@@ -43,10 +43,10 @@ public class EquipamentoController {
     private FacesContext facesContext;
 
     @Inject
-    private EquipamentoRegistration equipamentoRegistration;
+    private CadastroEquipamento equipamentoRegistration;
     
     @Inject
-    private MedicaoRegistration medicaoRegistration;
+    private CadastroMedicao medicaoRegistration;
     
     private static Logger log = LoggerFactory.getLogger(EquipamentoController.class);
 
@@ -73,7 +73,15 @@ public class EquipamentoController {
 	
 	private Long id;
 
-    @Produces
+    public CadastroEquipamento getEquipamentoRegistration() {
+		return equipamentoRegistration;
+	}
+
+	public void setEquipamentoRegistration(CadastroEquipamento equipamentoRegistration) {
+		this.equipamentoRegistration = equipamentoRegistration;
+	}
+
+	@Produces
     @Named
     public Equipamento getNovoEquipamento() {
         return novoEquipamento;
@@ -137,7 +145,7 @@ public class EquipamentoController {
 
 	public Equipamento getEditado() {
 		if(id!=null){
-			editado = equipamentoRegistration.buscarPorId(id);
+			editado = getEquipamentoRegistration().buscarPorId(id);
 		}
 		return editado;
 	}
@@ -148,7 +156,7 @@ public class EquipamentoController {
 
 	public void register() {
         try {
-        	equipamentoRegistration.register(novoEquipamento);
+        	getEquipamentoRegistration().register(novoEquipamento);
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registration successful"));
             initNovoEquipamento();
@@ -183,7 +191,7 @@ public class EquipamentoController {
 		}		
 		JFreeChart freeChart = ChartFactory.createLineChart("Temperatura", "Medições", "°C", dataset, PlotOrientation.VERTICAL, false, true, false);
 		freeChart.setBackgroundPaint(Color.WHITE);
-		File chartFile = new File("/tmp/tempChart");
+		File chartFile = new File("C:\\Windows\\Temp");
 		try {
 			ChartUtilities.saveChartAsPNG(chartFile, freeChart, 600, 300);
 			tempChart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
@@ -213,7 +221,7 @@ public class EquipamentoController {
 		}		
 		JFreeChart freeChart = ChartFactory.createLineChart("Umidade", "Medições", "kg/m³", dataset, PlotOrientation.VERTICAL, false, true, false);
 		freeChart.setBackgroundPaint(Color.WHITE);
-		File chartFile = new File("/tmp/umidChart");
+		File chartFile = new File("C:\\Windows\\Temp");
 		try {
 			ChartUtilities.saveChartAsPNG(chartFile, freeChart, 600, 300);
 			umidadeChart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
@@ -265,11 +273,11 @@ public class EquipamentoController {
 	}
 	
 	public void desativarEquipamento(Equipamento e){
-		equipamentoRegistration.desativarEquipamento(e);
+		getEquipamentoRegistration().desativarEquipamento(e);
 	}
 	
 	public void reativarEquipamento(Equipamento e){
-		equipamentoRegistration.reativarEquipamento(e);
+		getEquipamentoRegistration().reativarEquipamento(e);
 	}
 	
 	public String editar(){

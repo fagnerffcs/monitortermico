@@ -6,14 +6,14 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroEquipamento;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
-import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
 
 @Named
 public class EquipamentoConverter implements Converter {
 	
 	@Inject
-	private EquipamentoRegistration equipamentoRegistration;
+	private CadastroEquipamento equipamentoRegistration;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {

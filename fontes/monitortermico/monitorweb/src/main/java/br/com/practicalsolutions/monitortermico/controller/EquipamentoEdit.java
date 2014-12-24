@@ -8,9 +8,8 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroEquipamento;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
-import br.com.practicalsolutions.monitortermico.service.EquipamentoRegistration;
 
 @Named
 @RequestScoped
@@ -19,7 +18,7 @@ public class EquipamentoEdit {
     protected final Logger log = LoggerFactory.getLogger(EquipamentoEdit.class);	
 	
 	@Inject
-	private EquipamentoRegistration equipamentoRegistration;
+	private CadastroEquipamento equipamentoRegistration;
 	
 	private Equipamento equipamento;
 	
