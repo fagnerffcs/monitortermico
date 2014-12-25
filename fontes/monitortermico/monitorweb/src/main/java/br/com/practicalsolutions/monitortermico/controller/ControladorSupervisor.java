@@ -15,7 +15,7 @@ import br.com.practicalsolutions.monitortermico.model.Supervisor;
 
 @Model
 @SuppressWarnings("rawtypes")
-public class SupervisorController {
+public class ControladorSupervisor {
 	
 	@Inject
     private FacesContext facesContext;

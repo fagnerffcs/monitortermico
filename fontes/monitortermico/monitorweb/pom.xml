@@ -5,11 +5,11 @@
    <parent>
     <groupId>br.com.practicalsolutions</groupId>
     <artifactId>monitortermico</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
   </parent>
 
    <artifactId>monitorweb</artifactId>
-   <version>1.0-SNAPSHOT</version>
+   <version>1.1-SNAPSHOT</version>
    <packaging>war</packaging>
    <name>Monitor Térmico</name>
    <description>Sistema de Controle de Termohigrometro</description>
@@ -58,7 +58,7 @@
       <jboss.bom.version>1.0.0.Final</jboss.bom.version>
       <jfreechart.version>1.0.13</jfreechart.version>
       <junit.version>4.10</junit.version>
-      <primefaces.version>3.5</primefaces.version>
+      <primefaces.version>3.0</primefaces.version>
       <quartz.version>2.1.7</quartz.version>
       <servlet.version>2.5</servlet.version>
       <shrinkwrap.version>2.1.1</shrinkwrap.version>

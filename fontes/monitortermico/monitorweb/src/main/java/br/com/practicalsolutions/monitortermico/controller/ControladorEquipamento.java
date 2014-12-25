@@ -37,18 +37,18 @@ import br.com.practicalsolutions.monitortermico.model.Status;
 import br.com.practicalsolutions.monitortermico.model.TipoAlerta;
 
 @Model
-public class EquipamentoController {
+public class ControladorEquipamento {
 
 	@Inject
     private FacesContext facesContext;
 
     @Inject
-    private CadastroEquipamento equipamentoRegistration;
+    private CadastroEquipamento cadastroEquipamento;
     
     @Inject
-    private CadastroMedicao medicaoRegistration;
+    private CadastroMedicao cadastroMedicao;
     
-    private static Logger log = LoggerFactory.getLogger(EquipamentoController.class);
+    private static Logger log = LoggerFactory.getLogger(ControladorEquipamento.class);
 
     private Equipamento novoEquipamento;
     
@@ -73,12 +73,12 @@ public class EquipamentoController {
 	
 	private Long id;
 
-    public CadastroEquipamento getEquipamentoRegistration() {
-		return equipamentoRegistration;
+	public CadastroEquipamento getCadastroEquipamento() {
+		return cadastroEquipamento;
 	}
 
-	public void setEquipamentoRegistration(CadastroEquipamento equipamentoRegistration) {
-		this.equipamentoRegistration = equipamentoRegistration;
+	public void setCadastroEquipamento(CadastroEquipamento cadastroEquipamento) {
+		this.cadastroEquipamento = cadastroEquipamento;
 	}
 
 	@Produces
@@ -145,7 +145,7 @@ public class EquipamentoController {
 
 	public Equipamento getEditado() {
 		if(id!=null){
-			editado = getEquipamentoRegistration().buscarPorId(id);
+			editado = getCadastroEquipamento().buscarPorId(id);
 		}
 		return editado;
 	}
@@ -156,7 +156,7 @@ public class EquipamentoController {
 
 	public void register() {
         try {
-        	getEquipamentoRegistration().register(novoEquipamento);
+        	getCadastroEquipamento().register(novoEquipamento);
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado!", "Registration successful"));
             initNovoEquipamento();
@@ -174,12 +174,12 @@ public class EquipamentoController {
 	
 	public DefaultStreamedContent buildTemperaturaChart(Long id) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		if(medicaoRegistration!=null){
+		if(cadastroMedicao!=null){
 			int qtde = 1;
 			Calendar inicio = Calendar.getInstance();
 			inicio.add(Calendar.DATE, -1);
 
-			List<Medicao> lista = medicaoRegistration
+			List<Medicao> lista = cadastroMedicao
 								  .medicoesPorEquipamentoPorPeriodo(id, 
 																	inicio.getTime(), 
 																	new Date(),
@@ -204,11 +204,11 @@ public class EquipamentoController {
 
 	public DefaultStreamedContent buildUmidadeChart(Long id) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		if(medicaoRegistration!=null){
+		if(cadastroMedicao!=null){
 			int qtde = 1;
 			Calendar inicio = Calendar.getInstance();
 			inicio.add(Calendar.DATE, -1);		
-			List<Medicao> lista = medicaoRegistration
+			List<Medicao> lista = cadastroMedicao
 					  .medicoesPorEquipamentoPorPeriodo(id, 
 														inicio.getTime(), 
 														new Date(),
@@ -246,7 +246,7 @@ public class EquipamentoController {
 		Calendar inicio = Calendar.getInstance();
 		inicio.add(Calendar.DATE, -1);
 
-		List<Medicao> lista = medicaoRegistration
+		List<Medicao> lista = cadastroMedicao
 							  .medicoesPorEquipamentoPorPeriodo(selecionado.getId(), 
 																inicio.getTime(), 
 																new Date(),
@@ -273,11 +273,11 @@ public class EquipamentoController {
 	}
 	
 	public void desativarEquipamento(Equipamento e){
-		getEquipamentoRegistration().desativarEquipamento(e);
+		getCadastroEquipamento().desativarEquipamento(e);
 	}
 	
 	public void reativarEquipamento(Equipamento e){
-		getEquipamentoRegistration().reativarEquipamento(e);
+		getCadastroEquipamento().reativarEquipamento(e);
 	}
 	
 	public String editar(){

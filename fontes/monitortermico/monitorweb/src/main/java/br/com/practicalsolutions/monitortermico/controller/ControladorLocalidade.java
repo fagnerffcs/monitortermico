@@ -16,7 +16,7 @@ import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
 
 @Model
-public class LocalidadeController {
+public class ControladorLocalidade {
 	
 	@Inject
     private FacesContext facesContext;
