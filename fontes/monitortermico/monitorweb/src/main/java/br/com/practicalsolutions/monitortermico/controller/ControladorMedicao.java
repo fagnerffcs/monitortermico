@@ -2,6 +2,7 @@ package br.com.practicalsolutions.monitortermico.controller;
 
 import java.util.Date;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -14,6 +15,7 @@ import br.com.practicalsolutions.monitortermico.facade.Fachada;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 
+@ApplicationScoped
 public class ControladorMedicao {
 	
 	private Logger log = LoggerFactory.getLogger(ControladorMedicao.class);
@@ -21,13 +23,24 @@ public class ControladorMedicao {
 	private static final String FACHADA_LOOKUP = "java:global/monitorweb/Fachada";	
 	private static final String MEDICAO_REGISTRATION_LOOKUP = "java:global/monitorweb/CadastroMedicao";
 	
+	public CadastroMedicao getCadastroMedicao(){
+		CadastroMedicao cadastroMedicao = null;
+		try {
+			final Context con = new InitialContext();
+			cadastroMedicao = (CadastroMedicao) con.lookup(MEDICAO_REGISTRATION_LOOKUP);
+		} catch (NamingException ne) {
+			log.error("Erro ao criar CadastroMedicao");
+		}
+		return cadastroMedicao;
+	}
+	
 	public void obterDados(Equipamento e){
 		log.info("Obtendo dados do equipamento " + e.getDescricao());
 				  
 		try {
 			final Context con = new InitialContext();
 			Fachada fachada = (Fachada) con.lookup(FACHADA_LOOKUP);
-			CadastroMedicao cadastroMedicao = (CadastroMedicao) con.lookup(MEDICAO_REGISTRATION_LOOKUP);
+			CadastroMedicao cadastroMedicao = getCadastroMedicao();
 			
 			byte data[] = new byte[10];
 			data = fachada.getControladorTermohigrometro().getDadosFromEquipamento(e);
@@ -52,9 +65,11 @@ public class ControladorMedicao {
 			m.setMarcacao(new Date());
 			try {
 				cadastroMedicao.register(m);
-				fachada.getControladorAlerta().validarNecessidadeAlerta(m, e);
+				ControladorAlerta controladorAlerta = fachada.getControladorAlerta();
+				controladorAlerta.validarNecessidadeAlerta(m, e);
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				log.error("Erro ao obter a instancia do controlador alerta.");
+				log.error(e1.getMessage());
 			}
 					
 		} catch (NamingException ne) {

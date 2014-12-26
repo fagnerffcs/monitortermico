@@ -27,7 +27,7 @@
 				
 				<h:outputLabel for="protocolo" value="Protocolo:" />
 				<h:selectOneMenu id="protocolo" value="#{fachada.equipamentoEdit.equipamento.protocolo}">
-					<f:selectItems value="#{equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
 				</h:selectOneMenu>
 				<h:message for="protocolo" errorClass="invalid" />				
 
@@ -41,13 +41,13 @@
 
 				<h:outputLabel for="status" value="Status:" />
 				<h:selectOneMenu id="status" value="#{fachada.equipamentoEdit.equipamento.status}">
-					<f:selectItems value="#{equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
 				
 				<h:outputLabel for="tipoAlerta" value="Tipo do Alerta:" />
 				<h:selectOneMenu id="tipoAlerta" value="#{fachada.equipamentoEdit.equipamento.tipoAlerta}">
-					<f:selectItems value="#{equipamentoController.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="tipoAlerta" errorClass="invalid" />
 				

@@ -1,6 +1,6 @@
 package br.com.practicalsolutions.monitortermico.controller;
 
-import javax.enterprise.inject.Model;
+import javax.enterprise.context.ApplicationScoped;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import br.com.practicalsolutions.monitortermico.mail.Email;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 
-@Model
+@ApplicationScoped
 public class ControladorEmail {
 	
 	private Logger log = LoggerFactory.getLogger(ControladorEmail.class);

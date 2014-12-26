@@ -16,12 +16,12 @@
 			<h2>Cadastro de Localidades</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="name" value="Descrição:" />
-				<h:inputText id="name" value="#{fachada.localidadeEdit.localidade.descricao}" />
+				<h:inputText id="name" value="#{fachada.controladorLocalidade.novaLocalidade.descricao}" />
 				<h:message for="name" errorClass="invalid" />
 				
 				<h:outputLabel for="equipamentos" value="Equipamentos:" />
-				<p:selectManyMenu id="equipamentos" value="#{fachada.localidadeEdit.localidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
-					<f:selectItems value="#{fachada.localidadeController.listarEquipamentos()}" var="e" 
+				<p:selectManyMenu id="equipamentos" value="#{fachada.controladorLocalidade.novaLocalidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
+					<f:selectItems value="#{fachada.controladorLocalidade.listarEquipamentos()}" var="e" 
 								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
 								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
 					</f:selectItems>
@@ -31,7 +31,7 @@
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
-							action="#{fachada.localidadeController.register}" value="Inserir"
+							action="#{fachada.controladorLocalidade.register}" value="Inserir"
 							styleClass="register" />
 						<h:messages styleClass="messages" errorClass="invalid"
 							infoClass="valid" warnClass="warning" globalOnly="true" />

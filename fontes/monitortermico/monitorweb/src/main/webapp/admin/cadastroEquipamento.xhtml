@@ -8,7 +8,7 @@
 
 	<ui:define name="content">
 		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
-			<p:breadCrumb style="width:510px;">
+			<p:breadCrumb>
 				<p:menuitem title="Início" value="Home" url="/index.jsf" />
 			</p:breadCrumb>
 		</h:form>
@@ -21,7 +21,7 @@
 				
 				<h:outputLabel for="protocolo" value="Protocolo:" />
 				<h:selectOneMenu id="protocolo" value="#{novoEquipamento.protocolo}">
-					<f:selectItems value="#{fachada.equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
 				</h:selectOneMenu>
 				<h:message for="protocolo" errorClass="invalid" />				
 
@@ -35,13 +35,13 @@
 
 				<h:outputLabel for="status" value="Status:" />
 				<h:selectOneMenu id="status" value="#{novoEquipamento.status}">
-					<f:selectItems value="#{fachada.equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
 				
 				<h:outputLabel for="tipoAlerta" value="Forma de Alerta:" />
 				<h:selectOneMenu id="tipoAlerta" value="#{novoEquipamento.tipoAlerta}">
-					<f:selectItems value="#{fachada.equipamentoController.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+					<f:selectItems value="#{fachada.controladorEquipamento.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="tipoAlerta" errorClass="invalid" />
 
@@ -68,7 +68,7 @@
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
-							action="#{fachada.equipamentoController.register}" value="Inserir"
+							action="#{fachada.controladorEquipamento.register}" value="Inserir"
 							styleClass="register" />
 						<h:messages styleClass="messages" errorClass="invalid"
 							infoClass="valid" warnClass="warning" globalOnly="true" />
@@ -109,11 +109,11 @@
 				<p:column>
 	            	<f:facet name="header"> Ativar/Desativar</f:facet>
 	            	<h:commandLink rendered="#{equipamento.status eq 'ATIVO'}" 
-	            				   actionListener="#{fachada.equipamentoController.desativarEquipamento(equipamento)}">
+	            				   actionListener="#{fachada.controladorEquipamento.desativarEquipamento(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/close.png" />
 	            	</h:commandLink>
 	            	<h:commandLink rendered="#{equipamento.status eq 'INATIVO'}" 
-	            				   actionListener="#{fachada.equipamentoController.reativarEquipamento(equipamento)}">
+	            				   actionListener="#{fachada.controladorEquipamento.reativarEquipamento(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/enable.png" />
 	            	</h:commandLink>	            	
 	            </p:column>

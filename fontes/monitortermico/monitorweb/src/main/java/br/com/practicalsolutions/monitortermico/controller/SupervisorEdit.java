@@ -13,7 +13,6 @@ import br.com.practicalsolutions.monitortermico.model.Supervisor;
 
 @Named
 @RequestScoped
-@SuppressWarnings("rawtypes")
 public class SupervisorEdit {
 	
     protected final Logger log = LoggerFactory.getLogger(SupervisorEdit.class);	

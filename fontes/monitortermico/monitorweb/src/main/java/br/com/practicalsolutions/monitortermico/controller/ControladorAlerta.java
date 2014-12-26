@@ -1,6 +1,6 @@
 package br.com.practicalsolutions.monitortermico.controller;
 
-import javax.enterprise.inject.Model;
+import javax.enterprise.context.ApplicationScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,7 +15,7 @@ import br.com.practicalsolutions.monitortermico.model.Alerta;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 
-@Model
+@ApplicationScoped
 public class ControladorAlerta {
 	
 	private static Logger log = LoggerFactory.getLogger(ControladorAlerta.class);
@@ -46,10 +46,12 @@ public class ControladorAlerta {
 			Fachada fachada = (Fachada) con.lookup(FACHADA_LOOKUP);
 			switch (eq.getTipoAlerta()) {
 			case EMAIL:
-				fachada.getControladorEmail().enviarAlertaPorEmail(eq, m);
+				ControladorEmail controladorEmail = fachada.getControladorEmail();
+				controladorEmail.enviarAlertaPorEmail(eq, m);
 				break;
 			case SMS:
-				fachada.getControladorSMS().enviarAlertaPorSMS(eq, m);
+				ControladorSMS controladorSMS = fachada.getControladorSMS();
+				controladorSMS.enviarAlertaPorSMS(eq, m);
 				break;
 			default:
 				fachada.getControladorEmail().enviarAlertaPorEmail(eq, m);

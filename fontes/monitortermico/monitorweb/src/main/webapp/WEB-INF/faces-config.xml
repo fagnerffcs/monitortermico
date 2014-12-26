@@ -33,7 +33,7 @@
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{fachada.equipamentoController.goDetail(equipamento)}</from-action>
+			<from-action>#{fachada.controladorEquipamento.goDetail(equipamento)}</from-action>
 			<from-outcome>SUCESSO</from-outcome>
 			<to-view-id>/equipamento/equipamento_grafico.xhtml</to-view-id>
 			<redirect />
@@ -43,8 +43,8 @@
 	<navigation-rule>
 		 <from-view-id>/equipamento/equipamento_grafico.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{equipamentoController.voltar}</from-action>
-			<from-outcome>VOLTAR</from-outcome>
+			<from-action>#{fachada.controladorEquipamento.voltar}</from-action>
+			<from-outcome>SUCESSO</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>

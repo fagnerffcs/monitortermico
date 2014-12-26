@@ -27,13 +27,13 @@
         <!-- Ok this is where all the jobs are created: -->
         <schedule>
                 <job>
-                     <name>QuartzController</name>
-                     <job-class>br.com.practicalsolutions.monitortermico.controller.QuartzController</job-class>
+                     <name>ControladorQuartz</name>
+                     <job-class>br.com.practicalsolutions.monitortermico.controller.ControladorQuartz</job-class>
                 </job>
                 <trigger>
                         <simple>
                                 <name>OneMinuteIntervals</name>
-                                <job-name>QuartzController</job-name>
+                                <job-name>ControladorQuartz</job-name>
                                 <repeat-count>-1</repeat-count> <!-- repeat forever  -->
                                 <repeat-interval>100000</repeat-interval>  <!--  every 30 seconds -->
                         </simple>

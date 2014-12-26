@@ -14,7 +14,6 @@ import br.com.practicalsolutions.monitortermico.cadastro.CadastroSupervisor;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
 
 @Model
-@SuppressWarnings("rawtypes")
 public class ControladorSupervisor {
 	
 	@Inject

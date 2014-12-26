@@ -3,7 +3,7 @@ package br.com.practicalsolutions.monitortermico.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -15,7 +15,7 @@ import br.com.practicalsolutions.monitortermico.cadastro.CadastroLocalidade;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
 
-@Model
+@ApplicationScoped
 public class ControladorLocalidade {
 	
 	@Inject

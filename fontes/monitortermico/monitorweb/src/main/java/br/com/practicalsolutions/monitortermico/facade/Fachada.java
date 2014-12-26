@@ -1,21 +1,24 @@
 package br.com.practicalsolutions.monitortermico.facade;
 
 import javax.ejb.Singleton;
-import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.practicalsolutions.monitortermico.controller.ControladorAlerta;
 import br.com.practicalsolutions.monitortermico.controller.ControladorEmail;
 import br.com.practicalsolutions.monitortermico.controller.ControladorEquipamento;
+import br.com.practicalsolutions.monitortermico.controller.ControladorGrafico;
+import br.com.practicalsolutions.monitortermico.controller.ControladorLocalidade;
 import br.com.practicalsolutions.monitortermico.controller.ControladorMedicao;
 import br.com.practicalsolutions.monitortermico.controller.ControladorSMS;
+import br.com.practicalsolutions.monitortermico.controller.ControladorSupervisor;
 import br.com.practicalsolutions.monitortermico.controller.ControladorTermohigrometro;
 import br.com.practicalsolutions.monitortermico.controller.EquipamentoEdit;
-import br.com.practicalsolutions.monitortermico.controller.ControladorLocalidade;
-import br.com.practicalsolutions.monitortermico.controller.ControladorSupervisor;
+import br.com.practicalsolutions.monitortermico.controller.LocalidadeEdit;
+import br.com.practicalsolutions.monitortermico.controller.SupervisorEdit;
 
 @Singleton
-@ManagedBean(name="fachada")
+@Named(value="fachada")
 public class Fachada {
 
 	@Inject
@@ -23,9 +26,6 @@ public class Fachada {
 	
 	@Inject
 	private ControladorEquipamento controladorEquipamento;
-	
-	@Inject
-	private EquipamentoEdit equipamentoEdit;
 	
 	@Inject
 	private ControladorSupervisor controladorSupervisor;
@@ -45,6 +45,18 @@ public class Fachada {
 	@Inject
 	private ControladorTermohigrometro controladorTermohigrometro;
 	
+	@Inject
+	private ControladorGrafico controladorGrafico;
+	
+	@Inject
+	private EquipamentoEdit equipamentoEdit;
+
+	@Inject
+	private LocalidadeEdit localidadeEdit;
+	
+	@Inject
+	private SupervisorEdit supervisorEdit;
+	
 	public ControladorLocalidade getControladorLocalidade(){
 		if(controladorLocalidade==null){
 			controladorLocalidade = new ControladorLocalidade();
@@ -55,7 +67,7 @@ public class Fachada {
 	public ControladorEquipamento getControladorEquipamento(){
 		if(controladorEquipamento==null){
 			controladorEquipamento = new ControladorEquipamento();
-		}
+		} 
 		return controladorEquipamento;
 	}
 	
@@ -64,6 +76,20 @@ public class Fachada {
 			equipamentoEdit = new EquipamentoEdit();
 		}
 		return equipamentoEdit;
+	}
+	
+	public LocalidadeEdit getLocalidadeEdit(){
+		if(localidadeEdit==null){
+			localidadeEdit = new LocalidadeEdit();
+		}
+		return localidadeEdit;
+	}
+	
+	public SupervisorEdit getSupervisorEdit(){
+		if(supervisorEdit==null){
+			supervisorEdit = new SupervisorEdit();
+		}
+		return supervisorEdit;
 	}
 	
 	public ControladorSupervisor getControladorSupervisor(){
@@ -106,6 +132,13 @@ public class Fachada {
 			controladorTermohigrometro = new ControladorTermohigrometro();
 		}
 		return controladorTermohigrometro;
+	}
+	
+	public ControladorGrafico getControladorGrafico(){
+		if(controladorGrafico==null){
+			controladorGrafico = new ControladorGrafico();
+		}
+		return controladorGrafico;
 	}
 
 }

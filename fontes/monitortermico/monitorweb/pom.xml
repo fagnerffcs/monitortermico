@@ -5,13 +5,13 @@
    <parent>
     <groupId>br.com.practicalsolutions</groupId>
     <artifactId>monitortermico</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
   </parent>
 
    <artifactId>monitorweb</artifactId>
    <version>1.1-SNAPSHOT</version>
    <packaging>war</packaging>
-   <name>Monitor Térmico</name>
+   <name>Monitor Térmico Web</name>
    <description>Sistema de Controle de Termohigrometro</description>
 
    <licenses>
@@ -31,14 +31,13 @@
 	</distributionManagement>   
    
    <repositories>
+    <repository>
+    	<id>central</id>
+    	<url>http://localhost:8081/nexus/content/repositories/central/</url>
+    </repository>
 	<repository>
 		<id>primefaces</id>
 		<url>http://localhost:8081/nexus/content/repositories/primefaces/</url>
-	</repository>
-	<repository>
-		<id>cindacta3.releases</id>
-		<name>Cindacta III Nexus Server</name>
-		<url>http://localhost:8081/nexus/content/repositories/releases/</url>
 	</repository>
 	<repository>
 		<id>jboss</id>
@@ -58,7 +57,7 @@
       <jboss.bom.version>1.0.0.Final</jboss.bom.version>
       <jfreechart.version>1.0.13</jfreechart.version>
       <junit.version>4.10</junit.version>
-      <primefaces.version>3.0</primefaces.version>
+      <primefaces.version>5.1</primefaces.version>
       <quartz.version>2.1.7</quartz.version>
       <servlet.version>2.5</servlet.version>
       <shrinkwrap.version>2.1.1</shrinkwrap.version>
@@ -177,7 +176,7 @@
 	  <dependency>  
     	<groupId>org.primefaces</groupId>  
     	<artifactId>primefaces</artifactId>  
-    	<version>4.0</version>  
+    	<version>${primefaces.version}</version>  
 	  </dependency>
 	  
 	  <dependency>
@@ -275,7 +274,7 @@
 		    <artifactId>maven-surefire-plugin</artifactId>
 		    <version>2.17</version>
 			<configuration>
-		        <skipTests>false</skipTests>
+		        <skipTests>true</skipTests>
 		        <includes>
 		            <include>EquipamentoRegistrationIT.java</include>
 		            <include>LocalidadeRegistrationIT.java</include>
