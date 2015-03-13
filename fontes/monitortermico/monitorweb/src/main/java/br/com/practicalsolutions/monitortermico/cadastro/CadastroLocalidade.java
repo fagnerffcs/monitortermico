@@ -1,4 +1,4 @@
-package br.com.practicalsolutions.monitortermico.service;
+package br.com.practicalsolutions.monitortermico.cadastro;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -14,7 +14,7 @@ import org.hibernate.Session;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
 
 @Stateless
-public class LocalidadeRegistration {
+public class CadastroLocalidade {
 	
     @Inject
     private Logger log;

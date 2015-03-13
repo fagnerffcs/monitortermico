@@ -14,14 +14,11 @@
 		</h:form>
 
 		<h:form id="reg_detail" style="border:0" >
-			<p:graphicImage id="tempChart" value="#{equipamentoController.tempChart}" />
-			<p:graphicImage id="umidChart" value="#{equipamentoController.umidadeChart}" />
 		
-		    <p:lineChart id="linear" value="#{equipamentoController.linearModel}" legendPosition="e"  
-		         title="Temperatura x Umidade" minY="0" maxY="100" style="height:300px"/> 		
+			<p:chart type="line" model="#{fachada.controladorEquipamento.lineChartModel}" style="height: 300px;" />
 		
 			<div>
-				<h:commandButton value="Voltar" action="#{equipamentoController.voltar}" />
+				<h:commandButton value="Voltar" action="#{fachada.controladorEquipamento.voltar}" />
 			</div>
 			 
 		</h:form>

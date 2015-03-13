@@ -1,4 +1,4 @@
-package br.com.practicalsolutions.monitortermico.service;
+package br.com.practicalsolutions.monitortermico.cadastro;
 
 
 import java.util.Date;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import br.com.practicalsolutions.monitortermico.model.Medicao;
 
 @Stateless
-public class MedicaoRegistration {
+public class CadastroMedicao {
 	
 	private Logger log = LoggerFactory.getLogger(Medicao.class);
 	

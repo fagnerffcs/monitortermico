@@ -1,4 +1,4 @@
-package br.com.practicalsolutions.monitortermico.service;
+package br.com.practicalsolutions.monitortermico.cadastro;
 
 import java.util.logging.Logger;
 
@@ -15,7 +15,7 @@ import br.com.practicalsolutions.monitortermico.model.Alerta;
 import br.com.practicalsolutions.monitortermico.model.Equipamento;
 
 @Stateless
-public class AlertaRegistration {
+public class CadastroAlerta {
 	
     @Inject
     private Logger log;

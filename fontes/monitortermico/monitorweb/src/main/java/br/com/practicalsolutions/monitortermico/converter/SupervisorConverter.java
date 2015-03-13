@@ -6,14 +6,14 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroSupervisor;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
-import br.com.practicalsolutions.monitortermico.service.SupervisorRegistration;
 
 @Named
 public class SupervisorConverter implements Converter {
 	
 	@Inject
-	private  SupervisorRegistration supervisorRegistration;
+	private  CadastroSupervisor supervisorRegistration;
 	
 	@SuppressWarnings("rawtypes")
 	@Override

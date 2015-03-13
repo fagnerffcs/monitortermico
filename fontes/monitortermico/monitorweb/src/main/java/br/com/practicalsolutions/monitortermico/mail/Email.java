@@ -2,7 +2,7 @@ package br.com.practicalsolutions.monitortermico.mail;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -11,6 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.InitialContext;
+
 
 
 @Named

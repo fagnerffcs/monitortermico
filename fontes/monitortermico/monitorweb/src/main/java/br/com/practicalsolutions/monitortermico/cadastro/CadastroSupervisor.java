@@ -1,4 +1,4 @@
-package br.com.practicalsolutions.monitortermico.service;
+package br.com.practicalsolutions.monitortermico.cadastro;
 
 import java.util.List;
 
@@ -15,14 +15,15 @@ import org.slf4j.LoggerFactory;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
 
 @Stateless
-public class SupervisorRegistration {
+@SuppressWarnings({ "unchecked", "rawtypes" })
+public class CadastroSupervisor {
 	
-    private Logger log = LoggerFactory.getLogger(SupervisorRegistration.class);
+    private Logger log = LoggerFactory.getLogger(CadastroSupervisor.class);
 
     @PersistenceContext(unitName="primary")
     private EntityManager em;
 
-    @Inject
+	@Inject
     private Event<Supervisor> memberEventSrc;
 
     public void register(Supervisor supervisor) throws Exception {
@@ -33,7 +34,6 @@ public class SupervisorRegistration {
         memberEventSrc.fire(supervisor);
     }
     
-    @SuppressWarnings("unchecked")
 	public List<Supervisor> listarSupervisores(){
     	List<Supervisor> lista = em.createQuery("select s from Supervisor s").getResultList();
     	return lista;

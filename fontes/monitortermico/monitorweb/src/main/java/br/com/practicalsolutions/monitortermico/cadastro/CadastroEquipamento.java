@@ -1,4 +1,4 @@
-package br.com.practicalsolutions.monitortermico.service;
+package br.com.practicalsolutions.monitortermico.cadastro;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import br.com.practicalsolutions.monitortermico.model.Equipamento;
 import br.com.practicalsolutions.monitortermico.model.Status;
 
 @Stateless
-public class EquipamentoRegistration {
+public class CadastroEquipamento {
 	
-    private Logger log = LoggerFactory.getLogger(EquipamentoRegistration.class);
+    private Logger log = LoggerFactory.getLogger(CadastroEquipamento.class);
 
     @PersistenceContext(unitName="primary")
     private EntityManager em;

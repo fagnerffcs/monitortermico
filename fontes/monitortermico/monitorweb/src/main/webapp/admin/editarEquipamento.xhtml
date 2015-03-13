@@ -9,7 +9,7 @@
 	<ui:define name="content">
 	
 		<f:metadata>
-		    <f:viewParam name="equipamento" value="#{equipamentoEdit.equipamento}" converter="#{equipamentoConverter}" />
+		    <f:viewParam name="equipamento" value="#{fachada.equipamentoEdit.equipamento}" converter="#{equipamentoConverter}" />
 		</f:metadata>	
 	
 		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
@@ -22,62 +22,62 @@
 			<h2>Atualizar Equipamento</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="name" value="Descrição:" />
-				<h:inputText id="name" value="#{equipamentoEdit.equipamento.descricao}" />
+				<h:inputText id="name" value="#{fachada.equipamentoEdit.equipamento.descricao}" />
 				<h:message for="name" errorClass="invalid" />
 				
 				<h:outputLabel for="protocolo" value="Protocolo:" />
-				<h:selectOneMenu id="protocolo" value="#{equipamentoEdit.equipamento.protocolo}">
-					<f:selectItems value="#{equipamentoController.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
+				<h:selectOneMenu id="protocolo" value="#{fachada.equipamentoEdit.equipamento.protocolo}">
+					<f:selectItems value="#{fachada.controladorEquipamento.protocolo}" var="p" itemValue="#{p}" itemLabel="#{p.label}" />
 				</h:selectOneMenu>
 				<h:message for="protocolo" errorClass="invalid" />				
 
 				<h:outputLabel for="ip" value="IP:" />
-				<h:inputText id="ip" value="#{equipamentoEdit.equipamento.ip}" />
+				<h:inputText id="ip" value="#{fachada.equipamentoEdit.equipamento.ip}" />
 				<h:message for="ip" errorClass="invalid" />
 
 				<h:outputLabel for="porta" value="Porta:" />
-				<h:inputText id="porta" value="#{equipamentoEdit.equipamento.porta}" />
+				<h:inputText id="porta" value="#{fachada.equipamentoEdit.equipamento.porta}" />
 				<h:message for="porta" errorClass="invalid" />
 
 				<h:outputLabel for="status" value="Status:" />
-				<h:selectOneMenu id="status" value="#{equipamentoEdit.equipamento.status}">
-					<f:selectItems value="#{equipamentoController.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+				<h:selectOneMenu id="status" value="#{fachada.equipamentoEdit.equipamento.status}">
+					<f:selectItems value="#{fachada.controladorEquipamento.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="status" errorClass="invalid" />
 				
 				<h:outputLabel for="tipoAlerta" value="Tipo do Alerta:" />
-				<h:selectOneMenu id="tipoAlerta" value="#{equipamentoEdit.equipamento.tipoAlerta}">
-					<f:selectItems value="#{equipamentoController.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+				<h:selectOneMenu id="tipoAlerta" value="#{fachada.equipamentoEdit.equipamento.tipoAlerta}">
+					<f:selectItems value="#{fachada.controladorEquipamento.tipoAlerta}" var="s" itemValue="#{s}" itemLabel="#{s}" />
 				</h:selectOneMenu>
 				<h:message for="tipoAlerta" errorClass="invalid" />
 				
 				<h:outputLabel for="tolerancia" value="Limite de falha:" />
-				<p:spinner id="tolerancia" value="#{equipamentoEdit.equipamento.tolerancia}" min="0" max="15" />
+				<p:spinner id="tolerancia" value="#{fachada.equipamentoEdit.equipamento.tolerancia}" min="0" max="15" />
 				<h:message for="tolerancia" errorClass="invalid" />
 				
 				<h:outputLabel for="minTemp" value="Limite Mínimo Temperatura:" />
-				<h:inputText id="minTemp" value="#{equipamentoEdit.equipamento.limiteInferiorTemperatura}" />
+				<h:inputText id="minTemp" value="#{fachada.equipamentoEdit.equipamento.limiteInferiorTemperatura}" />
 				<h:message for="minTemp" errorClass="invalid" />
 				
 				<h:outputLabel for="maxTemp" value="Limite Máximo Temperatura:" />
-				<h:inputText id="maxTemp" value="#{equipamentoEdit.equipamento.limiteSuperiorTemperatura}" />
+				<h:inputText id="maxTemp" value="#{fachada.equipamentoEdit.equipamento.limiteSuperiorTemperatura}" />
 				<h:message for="maxTemp" errorClass="invalid" />
 
 				<h:outputLabel for="minUmid" value="Limite Mínimo Umidade:" />
-				<h:inputText id="minUmid" value="#{equipamentoEdit.equipamento.limiteInferiorUmidade}" />
+				<h:inputText id="minUmid" value="#{fachada.equipamentoEdit.equipamento.limiteInferiorUmidade}" />
 				<h:message for="minUmid" errorClass="invalid" />
 				
 				<h:outputLabel for="maxUmid" value="Limite Máximo Umidade:" />
-				<h:inputText id="maxUmid" value="#{equipamentoEdit.equipamento.limiteSuperiorUmidade}" />
+				<h:inputText id="maxUmid" value="#{fachada.equipamentoEdit.equipamento.limiteSuperiorUmidade}" />
 				<h:message for="maxUmid" errorClass="invalid" />									
 
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="btnUpdate"
-							action="#{equipamentoEdit.salvarEquipamento()}" value="Atualizar"
+							action="#{fachada.equipamentoEdit.salvarEquipamento()}" value="Atualizar"
 							styleClass="register" />
 						<h:commandButton id="btnBack"
-							action="#{equipamentoEdit.voltar()}" value="Voltar"
+							action="#{fachada.equipamentoEdit.voltar()}" value="Voltar"
 							styleClass="register" />
 														
 						<h:messages styleClass="messages" errorClass="invalid"

@@ -5,6 +5,7 @@
   <groupId>br.com.practicalsolutions</groupId>
   <artifactId>monitortermico</artifactId>
   <packaging>pom</packaging>
+  <name>Projeto Monitor Térmico</name>
   <version>1.0</version>
  
   <modules>

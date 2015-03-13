@@ -38,6 +38,20 @@
 	  <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
 	 </listener>
  
+	<!-- Início das configurações para o Spring Security 3 -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Fim das configuração para utilizar o Spring Security 3 -->
+
 	 <!-- JSF mapping -->
 	 <servlet>
 	  <servlet-name>Faces Servlet</servlet-name>
@@ -67,31 +81,10 @@
 	 <welcome-file-list>
 	  <welcome-file>index.html</welcome-file>
 	 </welcome-file-list>
-	 
- 	<!-- LDAP Security Configuration -->
-	<security-constraint>
-	  <web-resource-collection>
-	    <web-resource-name>HtmlAuth</web-resource-name>
-	    <description>application security constraints</description>
-	    <url-pattern>/admin/*</url-pattern>
-	    <http-method>GET</http-method>
-	    <http-method>POST</http-method>
-	  </web-resource-collection>
-	  <auth-constraint>
-	    <role-name>ADMIN</role-name>
-	  </auth-constraint>
-	</security-constraint>
-	<login-config>
-	    <auth-method>BASIC</auth-method>
-	    <realm-name>Autenticação via LDAP</realm-name>
-	</login-config>
-	<security-role>
-	    <role-name>ADMIN</role-name>
-	</security-role>
 
 	<!-- session config -->
 	<session-config>
 	    <session-timeout>60</session-timeout>
 	</session-config>
- 
+	
 </web-app>

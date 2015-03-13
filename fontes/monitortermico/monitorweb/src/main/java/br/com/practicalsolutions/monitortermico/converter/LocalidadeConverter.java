@@ -6,14 +6,14 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroLocalidade;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
-import br.com.practicalsolutions.monitortermico.service.LocalidadeRegistration;
 
 @Named
 public class LocalidadeConverter implements Converter {
 	
 	@Inject
-	private LocalidadeRegistration localidadeRegistration;
+	private CadastroLocalidade localidadeRegistration;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {

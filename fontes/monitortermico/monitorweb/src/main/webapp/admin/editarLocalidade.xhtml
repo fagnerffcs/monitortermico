@@ -9,7 +9,7 @@
 	<ui:define name="content">
 	
 		<f:metadata>
-		    <f:viewParam name="localidade" value="#{localidadeEdit.localidade}" converter="#{localidadeConverter}" />
+		    <f:viewParam name="localidade" value="#{fachada.localidadeEdit.localidade}" converter="#{localidadeConverter}" />
 		</f:metadata>	
 	
 		<h:form style="border: 0; padding:0; padding-bottom: 10px" >
@@ -22,12 +22,12 @@
 			<h2>Atualizar Localidade</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="name" value="Descrição:" />
-				<h:inputText id="name" value="#{localidadeEdit.localidade.descricao}" />
+				<h:inputText id="name" value="#{fachada.localidadeEdit.localidade.descricao}" />
 				<h:message for="name" errorClass="invalid" />
 				
 				<h:outputLabel for="equipamentos" value="Equipamentos:" />
-				<p:selectManyMenu id="equipamentos" value="#{localidadeEdit.localidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
-					<f:selectItems value="#{localidadeController.listarEquipamentos()}" var="e" 
+				<p:selectManyMenu id="equipamentos" value="#{fachada.localidadeEdit.localidade.equipamentosSupervisionados}" converter="#{equipamentoConverter}">
+					<f:selectItems value="#{fachada.controladorLocalidade.listarEquipamentos()}" var="e" 
 								   itemLabel="#{e.descricao}" noSelectionValue="Selecione o(s) equipamento(s)">
 								   <f:selectItem itemLabel="#{e.descricao}" value="#{e.id}"/>
 					</f:selectItems>
@@ -37,11 +37,11 @@
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
-							action="#{localidadeEdit.salvarLocalidade()}" value="Atualizar"
+							action="#{fachada.localidadeEdit.salvarLocalidade()}" value="Atualizar"
 							styleClass="register" />
 							
 						<h:commandButton id="btnBack"
-							action="#{localidadeEdit.voltar()}" value="Voltar"
+							action="#{fachada.localidadeEdit.voltar()}" value="Voltar"
 							styleClass="register" />							
 							
 						<h:messages styleClass="messages" errorClass="invalid"

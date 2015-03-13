@@ -8,8 +8,8 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroSupervisor;
 import br.com.practicalsolutions.monitortermico.model.Supervisor;
-import br.com.practicalsolutions.monitortermico.service.SupervisorRegistration;
 
 @Named
 @RequestScoped
@@ -18,7 +18,7 @@ public class SupervisorEdit {
     protected final Logger log = LoggerFactory.getLogger(SupervisorEdit.class);	
 	
 	@Inject
-	private SupervisorRegistration supervisorRegistration;
+	private CadastroSupervisor supervisorRegistration;
 	
 	private Supervisor supervisor;
 	

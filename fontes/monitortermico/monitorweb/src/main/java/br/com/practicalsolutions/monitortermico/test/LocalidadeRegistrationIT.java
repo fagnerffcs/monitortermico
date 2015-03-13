@@ -12,19 +12,19 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.com.practicalsolutions.monitortermico.cadastro.CadastroLocalidade;
 import br.com.practicalsolutions.monitortermico.model.Localidade;
-import br.com.practicalsolutions.monitortermico.service.LocalidadeRegistration;
 
 @RunWith(Arquillian.class)
 public class LocalidadeRegistrationIT {
 	
 	@Inject
-	private LocalidadeRegistration localidadeRegistration;
+	private CadastroLocalidade localidadeRegistration;
 	
 	@Deployment
 	public static WebArchive createDeployment(){
 		WebArchive war = ShrinkWrap.create(WebArchive.class, "monitorweb-test.war")
-								   .addClasses(LocalidadeRegistration.class,
+								   .addClasses(CadastroLocalidade.class,
 										   	   Localidade.class)
 								   .addAsResource("META-INF/persistence.xml")
 								   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");

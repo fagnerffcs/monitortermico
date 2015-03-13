@@ -5,10 +5,10 @@
   <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
    PATH="/index.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="SUCESSO:#{equipamentoController.goDetail(equipamento)}:#equipamento#equipamento_grafico.xhtml"
+    ID="SUCESSO:#{fachada.controladorEquipamento.goDetail(equipamento)}:#equipamento#equipamento_grafico.xhtml"
     NAME="output" PATH="/equipamento/equipamento_grafico.xhtml"
     TARGET="rules:#equipamento#equipamento_grafico.xhtml"
-    TITLE="#{equipamentoController.goDetail(equipamento)}:SUCESSO" model-entity="JSFProcessItemOutput"/>
+    TITLE="#{fachada.controladorEquipamento.goDetail(equipamento)}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#equipamento#equipamento_grafico.xhtml"
@@ -16,9 +16,9 @@
   <PROCESS-ITEM ID="rules:#equipamento#equipamento_grafico.xhtml:0"
    NAME="item" PATH="/equipamento/equipamento_grafico.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="VOLTAR:#{equipamentoController.voltar}:#index.xhtml"
+    ID="SUCESSO:#{fachada.controladorEquipamento.voltar}:#index.xhtml"
     NAME="output" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
-    TITLE="#{equipamentoController.voltar}:VOLTAR" model-entity="JSFProcessItemOutput"/>
+    TITLE="#{fachada.controladorEquipamento.voltar}:SUCESSO" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

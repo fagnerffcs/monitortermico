@@ -16,7 +16,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-public class Supervisor<T> {
+public class Supervisor {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

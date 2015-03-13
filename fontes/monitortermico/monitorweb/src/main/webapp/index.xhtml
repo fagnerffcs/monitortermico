@@ -21,21 +21,24 @@
 					<p:menuitem value="Supervisor" url="/admin/cadastroSupervisor.jsf" />
 				</p:submenu>
 			</p:menubar>
-			
+
 			<p:spacer height="10" />
 
+			<h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                    <h:outputText value="Sair"/>
+            </h:outputLink>
 		
 		 	<p:growl id="msgs" showDetail="true" /> 
 		
 			<p:dataTable var="equipamento" value="#{equipamentos}" rendered="#{not empty equipamentos}"
 						 rowStyleClass="#{equipamento.status eq 'ATIVO' ? 'active' : 'inactive'}">
 	
-				<p:column style="width: 10%" >
+				<p:column style="width: 5%" >
 					<f:facet name="header">Id</f:facet>
 		                #{equipamento.id}
 	            </p:column>
 	
-				<p:column style="width: 30%">
+				<p:column style="width: 25%">
 					<f:facet name="header">Descrição</f:facet>
 		                #{equipamento.descricao}
 	            </p:column>
@@ -55,16 +58,16 @@
 		                #{equipamento.status}
 	            </p:column>
 	            
-	            <p:column>
+	            <p:column style="width: 10%">
 	            	<f:facet name="header">Gráfico</f:facet>
-	            	<h:commandLink action="#{equipamentoController.goDetail(equipamento)}">
+	            	<h:commandLink action="#{fachada.controladorEquipamento.goDetail(equipamento)}">
 	            		<p:graphicImage value="/resources/gfx/termometro.png" />
 	            	</h:commandLink>
 	            </p:column>	            
 	            
 		        <p:column style="width:4%">  
 		            <p:commandButton id="selectButton" update=":dlgForm:display" oncomplete="equipamentoDialog.show()" icon="ui-icon-search" title="Detalhes">
-		            	<f:setPropertyActionListener target="#{equipamentoController.selecionado}" value="#{equipamento}" />
+		            	<f:setPropertyActionListener target="#{fachada.controladorEquipamento.selecionado}" value="#{equipamento}" />
 		            </p:commandButton>  
 		        </p:column>	            
 	            
@@ -76,25 +79,25 @@
   	  <h:form id="dlgForm">
         <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
             <h:outputText value="Descrição:" />  
-            <h:outputText value="#{equipamentoController.selecionado.descricao}" style="font-weight:bold"/>  
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.descricao}" style="font-weight:bold"/>  
   
             <h:outputText value="IP:" />  
-            <h:outputText value="#{equipamentoController.selecionado.ip}" style="font-weight:bold"/>
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.ip}" style="font-weight:bold"/>
             
             <h:outputText value="Porta:" />  
-            <h:outputText value="#{equipamentoController.selecionado.porta}" style="font-weight:bold"/>              
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.porta}" style="font-weight:bold"/>              
   
             <h:outputText value="Mínimo Temperatura:" />  
-            <h:outputText value="#{equipamentoController.selecionado.limiteInferiorTemperatura}" style="font-weight:bold"/>              
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.limiteInferiorTemperatura}" style="font-weight:bold"/>              
 
             <h:outputText value="Máximo Temperatura:" />  
-            <h:outputText value="#{equipamentoController.selecionado.limiteSuperiorTemperatura}" style="font-weight:bold"/>              
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.limiteSuperiorTemperatura}" style="font-weight:bold"/>              
 
             <h:outputText value="Mínimo Umidade:" />  
-            <h:outputText value="#{equipamentoController.selecionado.limiteInferiorUmidade}" style="font-weight:bold"/>              
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.limiteInferiorUmidade}" style="font-weight:bold"/>              
   
             <h:outputText value="Máximo Umidade:" />  
-            <h:outputText value="#{equipamentoController.selecionado.limiteSuperiorUmidade}" style="font-weight:bold"/>              
+            <h:outputText value="#{fachada.controladorEquipamento.selecionado.limiteSuperiorUmidade}" style="font-weight:bold"/>              
         </h:panelGrid>  
 	  </h:form>  
     </p:dialog>		
