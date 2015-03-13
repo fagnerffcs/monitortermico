@@ -21,9 +21,12 @@
 					<p:menuitem value="Supervisor" url="/admin/cadastroSupervisor.jsf" />
 				</p:submenu>
 			</p:menubar>
-			
+
 			<p:spacer height="10" />
 
+			<h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                    <h:outputText value="Sair"/>
+            </h:outputLink>
 		
 		 	<p:growl id="msgs" showDetail="true" /> 
 		
