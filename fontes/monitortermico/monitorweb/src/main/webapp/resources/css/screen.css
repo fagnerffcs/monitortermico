@@ -193,3 +193,8 @@ input {
 .active{
 	background-color: #00FF00;
 }
+
+ui-panel-content, .ui-widget-content{
+    padding:0px;
+	border: none;
+}
