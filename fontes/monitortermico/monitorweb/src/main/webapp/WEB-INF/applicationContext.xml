@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:b="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/security
+                            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+ 
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/index.jsf" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+        <form-login login-page="/login.jsf" authentication-failure-url="/login.jsf?erro=true"/>
+        <access-denied-handler error-page="/proibido.jsf" />
+    </http>
+     
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+               users-by-username-query="SELECT username, password, enable FROM usuario WHERE username=?"
+               authorities-by-username-query="SELECT username, nome as authority FROM usuario_autorizacao WHERE username=?"
+            />
+        </authentication-provider>
+    </authentication-manager>
+ 
+    <b:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" >
+        <b:property name="jndiName" value="java:jboss/datasources/MonitorTermicoDS" />
+    </b:bean>
+ 
+</b:beans>
